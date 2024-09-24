@@ -3,9 +3,24 @@ const express = require('express') // Note to self: Go here if you forgot everyt
 const app = express() // creates an instance of express called app
 const port = 3000 //Only used to host locally for testing
 const pgp = require('pg-promise')(/* options */) // required postgresql connection based on https://expressjs.com/en/guide/database-integration.html#postgresql
+const fs = require('fs')
+const sslInfo = {
+    cs: fs.readFileSync('./global-bundle.pem').toString(),
+    rejectUnauthorized: false
+}
+
+const connInfo = {
+    host: 'psql-db.cxqmy8c800g2.eu-west-2.rds.amazonaws.com',  // e.g., 'your-instance-name.region.rds.amazonaws.com'
+    port: 5432,
+    database: 'bank_info',
+    user: 'postgres',
+    password: 'AWS2024ITPatUoD',
+    ssl: sslInfo
+}
+
 
 // connection format is 'postgres://username:password@host:port/database'
-const connection = pgp('postgres://postgres:AWS2024ITPatUoD@psql-db.cxqmy8c800g2.eu-west-2.rds.amazonaws.com:5432/bank_info') 
+const connection = pgp(connInfo) 
 
 // may be a problem with how i have lambda set up but the base route doesnt appear to be accesible
 app.get('/', (req, res) => {
@@ -36,6 +51,6 @@ app.all('*', (req, res) => {
 // Only used to host locally for testing
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
-})
+})  
 
 //module.exports.handler = serverless(app) // only needed for deploying onto aws lambda
