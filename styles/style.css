@@ -23,11 +23,7 @@
 
 /* --------------------------- RESPONSIVE TEXT SIZE ------------------------------- */
 
-<<<<<<< Updated upstream
-.scaling-text {
-=======
 .scaling-title-text {
->>>>>>> Stashed changes
   font-size: clamp(32px, 12vw, 60px);
   width: 50%;
   text-align: center;
@@ -36,13 +32,11 @@
 }
 
 @media (min-width: 768px) { /* tablet/phone screens */
-<<<<<<< Updated upstream
   .scaling-text {
     font-size: clamp(120px, 8vw, 160px); /* min size, viewport width (how it scales), max size  */
   }
 }
 
-=======
   .scaling-title-text {
     font-size: clamp(120px, 10vw, 160px); /* min size, viewport width (how it scales), max size  */
   }
@@ -74,7 +68,6 @@
     font-size: clamp(50px, 2vw, 75px);
   }
 }
->>>>>>> Stashed changes
 
 /* --------------------------- RESPONSIVE TEXT SIZE ------------------------------- */
 
@@ -99,7 +92,7 @@
 @media (min-width: 1200px) {
   .dynamic-button {
 <<<<<<< Updated upstream
-    width: 65%; 
+    width: 65%;
 =======
     width: 65%;
 >>>>>>> Stashed changes
@@ -108,7 +101,6 @@
 
 /* ---------------------------- RESPONSIVE BUTTONS -------------------------------- */
 
-<<<<<<< Updated upstream
 /* --------------------------------- GLOBAL --------------------------------------- */
 
 body {
@@ -119,8 +111,6 @@ body {
 
 /* --------------------------------- GLOBAL --------------------------------------- */
 
-=======
->>>>>>> Stashed changes
 /* --------------------------------- TITLE ---------------------------------------- */
 
 .title {
@@ -144,8 +134,6 @@ body {
 }
 
 /* --------------------------------- TITLE ---------------------------------------- */
-<<<<<<< Updated upstream
-=======
 
 /* --------------------------------- GLOBAL --------------------------------------- */
 
@@ -156,4 +144,3 @@ body {
 }
 
 /* --------------------------------- GLOBAL --------------------------------------- */
->>>>>>> Stashed changes
