@@ -9,7 +9,11 @@
   <body>
     <div class="title-container">
       <div class="title">
+<<<<<<< Updated upstream
           <h1 class="oswaldMedium scaling-text">Settings</h1>
+=======
+          <h1 class="oswaldMedium scaling-title-text">Settings</h1>
+>>>>>>> Stashed changes
       </div>
       <div class="divider"></div>
     </div>
@@ -17,7 +21,11 @@
     <div class="body-container">
       <div class="buttons">
         <div class="d-grid gap-2">
+<<<<<<< Updated upstream
           <button class="btn btn-outline-light dynamic-button" type="button">FAQ</button>
+=======
+          <button class="btn btn-outline-light dynamic-button" type="button" onclick="window.location.href='faq.php';">FAQ</button>
+>>>>>>> Stashed changes
           <button class="btn btn-outline-light dynamic-button" type="button">Log out</button>
         </div>
       </div>

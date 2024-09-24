@@ -23,7 +23,11 @@
 
 /* --------------------------- RESPONSIVE TEXT SIZE ------------------------------- */
 
+<<<<<<< Updated upstream
 .scaling-text {
+=======
+.scaling-title-text {
+>>>>>>> Stashed changes
   font-size: clamp(32px, 12vw, 60px);
   width: 50%;
   text-align: center;
@@ -32,11 +36,45 @@
 }
 
 @media (min-width: 768px) { /* tablet/phone screens */
+<<<<<<< Updated upstream
   .scaling-text {
     font-size: clamp(120px, 8vw, 160px); /* min size, viewport width (how it scales), max size  */
   }
 }
 
+=======
+  .scaling-title-text {
+    font-size: clamp(120px, 10vw, 160px); /* min size, viewport width (how it scales), max size  */
+  }
+}
+
+@media (min-width: 1200px) {
+  .scaling-title-text {
+    font-size: clamp(160px, 6vw, 160px);
+  }
+}
+
+.scaling-body-text {
+  font-size: clamp(20px, 4vw, 30px);
+  line-height: 1.6;
+  margin: 10px 0;
+  width: 95%;
+  padding-left: 15px;
+}
+
+
+@media (min-width: 768px) {
+  .scaling-body-text {
+    font-size: clamp(40px, 2.5vw, 55px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .scaling-body-text {
+    font-size: clamp(50px, 2vw, 75px);
+  }
+}
+>>>>>>> Stashed changes
 
 /* --------------------------- RESPONSIVE TEXT SIZE ------------------------------- */
 
@@ -60,12 +98,17 @@
 
 @media (min-width: 1200px) {
   .dynamic-button {
+<<<<<<< Updated upstream
     width: 65%; 
+=======
+    width: 65%;
+>>>>>>> Stashed changes
   }
 }
 
 /* ---------------------------- RESPONSIVE BUTTONS -------------------------------- */
 
+<<<<<<< Updated upstream
 /* --------------------------------- GLOBAL --------------------------------------- */
 
 body {
@@ -76,6 +119,8 @@ body {
 
 /* --------------------------------- GLOBAL --------------------------------------- */
 
+=======
+>>>>>>> Stashed changes
 /* --------------------------------- TITLE ---------------------------------------- */
 
 .title {
@@ -99,3 +144,16 @@ body {
 }
 
 /* --------------------------------- TITLE ---------------------------------------- */
+<<<<<<< Updated upstream
+=======
+
+/* --------------------------------- GLOBAL --------------------------------------- */
+
+body {
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  background-color: rgb(62, 70, 78);
+}
+
+/* --------------------------------- GLOBAL --------------------------------------- */
+>>>>>>> Stashed changes
