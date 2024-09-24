@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../styles/style.css">
   </head>
   <body>
+    <?php
+      require 'navbar.html'
+    ?>
+
     <div class="title-container">
       <div class="title">
           <h1 class="oswaldMedium scaling-title-text">Settings</h1>
