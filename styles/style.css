@@ -1,0 +1,101 @@
+/* ---------------------------------- FONTS --------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+.oswald-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.oswaldExtraLight {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+}
+
+.oswaldMedium {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+/* ---------------------------------- FONTS --------------------------------------- */
+
+/* --------------------------- RESPONSIVE TEXT SIZE ------------------------------- */
+
+.scaling-text {
+  font-size: clamp(32px, 12vw, 60px);
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) { /* tablet/phone screens */
+  .scaling-text {
+    font-size: clamp(120px, 8vw, 160px); /* min size, viewport width (how it scales), max size  */
+  }
+}
+
+
+/* --------------------------- RESPONSIVE TEXT SIZE ------------------------------- */
+
+/* ---------------------------- RESPONSIVE BUTTONS -------------------------------- */
+
+
+.dynamic-button {
+  width: 85%;
+  font-size: clamp(30px, 5vw, 50px);
+  padding: clamp(10px, 2vw, 20px) clamp(20px, 5vw, 40px);
+  margin: 10px auto;
+  display: block;
+  border: 5px solid white;
+}
+
+@media (min-width: 768px) {
+  .dynamic-button {
+    width: 85%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dynamic-button {
+    width: 65%; 
+  }
+}
+
+/* ---------------------------- RESPONSIVE BUTTONS -------------------------------- */
+
+/* --------------------------------- GLOBAL --------------------------------------- */
+
+body {
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  background-color: rgb(62, 70, 78);
+}
+
+/* --------------------------------- GLOBAL --------------------------------------- */
+
+/* --------------------------------- TITLE ---------------------------------------- */
+
+.title {
+  padding-top: 30px;
+  background-color: rgb(43, 48, 53);
+  padding-bottom: 30px;
+}
+
+.divider {
+  width: 85%;
+  background-color: white;
+  height: 10px;
+  margin: 0 auto 20px auto;
+  border-radius: 10px;
+}
+
+@media (min-width: 1200px) {
+  .divider {
+    width: 65%;
+  }
+}
+
+/* --------------------------------- TITLE ---------------------------------------- */
