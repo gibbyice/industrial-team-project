@@ -34,7 +34,7 @@ app.get('/hello', (req, res) => {
 // Returns a user's greenscore based on the account number provided
 app.get('/:userID/greenscore', (req, res) => {
   var userID = req.params.userID
-  connection.one(`SELECT Green_Score FROM users WHERE userid = ${userID};`)
+  connection.one(`SELECT Green_Score FROM users WHERE userid = $1;` [userID])
   .then((data) => {
     console.log('DATA: ', data)
   })
@@ -65,7 +65,16 @@ app.get('/AddAccount/:userID/:name/:balance/:greenscore/:carbon/:waste/:sustaina
   var waste = req.params.waste
   var sustainability = req.params.sustainability
   var category = req.params.category
-  connection.one(`INSERT INTO users (userID, name, balance, Green_Score, streak, carbon_emissions, waste_management, sustainability_practices, category) VALUES (${userID}, ${name}, ${balance}, ${greenscore}, 0, ${carbon}, ${waste}, ${sustainability}, ${category}) RETURNING *;`, )
+  // Doing queries as below ensures they are not vulnerable to SQL Injection attacks,
+  // Please try do so in other queries
+  connection.one(`INSERT INTO users 
+    (userID, name, balance, 
+    Green_Score, streak, carbon_emissions, 
+    waste_management, sustainability_practices, category) 
+    VALUES ($1, $2, $3, 
+    $4, 0, $5, 
+    $6, $7, $8) 
+    RETURNING *;`, [userID, name, balance, greenscore, carbon, waste, sustainability, category])
   .then((data) => {
     res.json(data)
   })
