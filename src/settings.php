@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../styles/style.css">
   </head>
   <body>
+    <?php
+      require 'navbar.html'
+    ?>
+
     <div class="title-container">
       <div class="title">
           <h1 class="oswaldMedium scaling-title-text">Settings</h1>
@@ -27,7 +31,7 @@
 
 
 
-
+    <div class="manual-spacer" style="height: 160px;"></div> <!-- non-elegant solution to not having content hidden behind the navbar :) but if it's stupid but works it ain't stupid -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
