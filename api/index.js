@@ -5,7 +5,7 @@ const port = 3000 //Only used to host locally for testing
 const pgp = require('pg-promise')(/* options */) // required postgresql connection based on https://expressjs.com/en/guide/database-integration.html#postgresql
 const fs = require('fs')
 const sslInfo = {
-    cs: fs.readFileSync('./global-bundle.pem').toString(),
+    //cs: fs.readFileSync('./global-bundle.pem').toString(),
     rejectUnauthorized: false
 }
 
@@ -46,12 +46,36 @@ app.get('/:userID/greenscore', (req, res) => {
 //Returns a user's information based on the user ID provided
 app.get('/Account/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.one(`SELECT * FROM users WHERE userid = ${userID};`)
+  connection.one(`SELECT * FROM users WHERE userid = $1;`, userID)
   .then((data) => {
     res.json(data)
   })
   .catch((error) => {
     console.log('ERROR:', error)
+  })
+})
+
+app.get('/AddNewPayee/:payerID/:payeeID', (req, res) => {
+
+  var payerID = req.params.payerID
+  var payeeID = req.params.payeeID
+  connection.one(`CALL add_new_payee($1, $2)`, [payerID, payeeID])
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((error) => {console.log("ITS OVER! $1", error)})
+})
+
+app.get('/SendMoney/:payerID/:payeeID/:amount', (req, res) => {
+  var payerID = req.params.payerID
+  var payeeID = req.params.payeeID
+  var amount = req.params.amount
+  connection.one(`CALL send_money($1, $2, $3);`)
+  .then((data) => {
+    console.log("Sent money to user: ", data)
+  })
+  .catch((error) => {
+    console.log("ERROR in sending money", error)
   })
 })
 
@@ -91,6 +115,7 @@ app.all('*', (req, res) => {
 // Only used to host locally for testing
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
-})  
+})
+
 
 //module.exports.handler = serverless(app) // only needed for deploying onto aws lambda
