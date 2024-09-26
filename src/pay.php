@@ -25,7 +25,7 @@
 
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <img src="../icons/business.png" alt="Payee Icon" class="payee-icon me-3">
+                    <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">
                     <p>Eco farm produce</p>
                 </div>
                 <div class="button-group">
@@ -38,7 +38,7 @@
 
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <img src="../icons/person.png" alt="Payee Icon" class="payee-icon me-3">
+                    <img src="icons/person.png" alt="Payee Icon" class="payee-icon me-3">
                     <p>Naomi Silver</p>
                 </div>
                 <div class="button-group">
