@@ -34,7 +34,7 @@ app.get('/hello', (req, res) => {
 // Returns a user's greenscore based on the account number provided
 app.get('/:userID/greenscore', (req, res) => {
   var userID = req.params.userID
-  connection.one(`SELECT Green_Score FROM users WHERE userid = $1;` [userID])
+  connection.one(`SELECT Green_Score FROM users WHERE userid = $1;`, userID)
   .then((data) => {
     return res.status(200).json({data})
   })
@@ -53,6 +53,7 @@ app.get('/Account/:userID', (req, res) => {
   })
   .catch((error) => {
     console.log('ERROR:', error)
+    res.status(404).json({Error: "No user exists with that ID"})
   })
 })
 
