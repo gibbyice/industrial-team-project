@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Add New Payee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+    <body>
+        <?php
+        require 'navbar.html';
+        ?>
+
+        <div class="title-container">
+            <div class="title">
+                <h1 class="oswaldMedium scaling-title-text">Add New Payee</h1>
+            </div>
+            <div class="divider"></div>
+        </div>
+        <div id="payment-form" class="payment-form-container">
+            <div class="payment-form-box">
+                <h3 class="me-3"><strong>New Payee Details</strong></h3>
+                <form action="#" onsubmit="showConfirmation(); return false;">
+                    <div class="mt-3">
+                        <input type="text" class="form-control" id="accNum" name="accNum" placeholder="Name or Account Number" required>
+                    </div>
+                    <div class="d-flex confirmation-btns mt-4">
+                        <button class="btn btn-success payment-form-btn">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
