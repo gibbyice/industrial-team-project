@@ -168,9 +168,9 @@ app.post('/addUser', jsonParser, (req, res) => {
   // Execute
   connection.one(`INSERT INTO users 
     (name, balance, 
-    Green_Score, streak) 
+    Green_Score, streak, category) 
     VALUES ($1, 0, 0, 
-    0) 
+    0, 'User') 
     RETURNING *;`, name)
   .then(
     res.status(200).json({Message: "User successfully added."})
