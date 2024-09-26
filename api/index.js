@@ -61,15 +61,16 @@ app.get('/Account/:userID', (req, res) => {
 })
 
 app.post('/AddNewPayee', jsonParser, (req, res) => {
-  console.log(req.body)
   var payerID = req.body.payerID
   var payeeID = req.body.payeeID
-  connection.one(`CALL add_new_payee($1, $2)`, [payerID, payeeID])
+  connection.none(`CALL add_new_payee($1, $2)`, [payerID, payeeID])
   .then( 
     res.status(200).json({Message: "Payee was added successfully."})
   )
-  .catch((error) => {console.log("ITS OVER! $1", error)})
-  res.status(400).json({Error: "Something went wrong, please verify the specified accounts exist."})
+  .catch((error) => {
+    console.log("ITS OVER! $1", error)
+    res.status(400).json({Error: "Something went wrong, please verify the specified accounts exist."})
+  })
 })
 
 app.get('/SendMoney/:payerID/:payeeID/:amount', (req, res) => {
