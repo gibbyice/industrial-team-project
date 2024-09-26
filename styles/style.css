@@ -119,8 +119,8 @@ body {
   background-color: rgb(43, 48, 53);
   color: white;
   border: 2px solid #ccc;
-  font-size: clamp(25px, 4vw, 38px);
-  padding: clamp(10px, 2vw, 20px) clamp(10px, 2vw, 20px); /* Added scaling */
+  font-size: 2.5rem;
+  padding: 1.5rem;
   display: flex;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -128,7 +128,7 @@ body {
 
 .button-group {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 }
 
 .payee-icon {
@@ -138,8 +138,8 @@ body {
 }
 
 button.payee-btn {
-  padding: clamp(10px, 2vw, 20px);
-  font-size: clamp(18px, 4vw, 22px);
+  padding: 1.5rem;
+  font-size: 2rem;
   width: auto;
 }
 
@@ -153,13 +153,58 @@ button.payee-btn.btn-danger {
 
 .letter-header {
   background-color: rgb(43, 48, 53);
-  color: white;
-  font-size: clamp(25px, 4vw, 38px);
-  padding: clamp(10px, 2vw, 20px) clamp(10px, 2vw, 20px);
-  display: flex;
+  font-size: 1.8rem;
+  padding: 1.2rem;
   border-radius: 10px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
 }
 
 /* ---------------------------- PAYEE LIST STYLING -------------------------------- */
+
+/* ------------------------- ADD PYMT DETAILS STYLING ----------------------------- */
+
+.payment-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.payment-form-box {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgb(43, 48, 53);
+  padding: 40px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+}
+
+.payment-form-box h3 {
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.payment-form-box .form-label {
+  font-size: 2.5rem;
+}
+
+.payment-form-box .form-control {
+  font-size: 2.5rem;
+  padding: 15px;
+}
+
+.payment-form-btn {
+  font-size: 2.5rem;
+  padding: 15px;
+  width: 100%;
+}
+
+.confirm-details {
+  font-size: 2.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ------------------------- ADD PYMT DETAILS STYLING ----------------------------- */
