@@ -130,12 +130,10 @@ app.post('/AddCompany', jsonParser, (req, res) => {
         categories.push(data[i].category)
       }
     } 
-    console.log(categories)
     // Validate provided category
     if (!categories.includes(category)){
       return res.status(400).json({Error: `Please make sure the category entered is one of the following: ${categories}`}) 
     }
-    /*
     // Finally actually do the thing
     // Doing queries as below ensures they are not vulnerable to SQL Injection attacks,
     // Please try do so in other queries
@@ -154,7 +152,6 @@ app.post('/AddCompany', jsonParser, (req, res) => {
       console.log('ERROR:', error)
       res.status(500).json({Error: "Inernal Server Error - Error adding company to database"})
     })
-      */
   })
   .catch ((error) => {
     console.log("Error retrieving categories: " + error)
@@ -181,6 +178,24 @@ app.post('/addUser', jsonParser, (req, res) => {
   .catch((error) => {
     console.log('ERROR:', error)
     res.status(500).json({Error: "Inernal Server Error - Error adding user to database"})
+  })
+})
+
+app.put('/UpdateCompanyRAG', jsonParser, (req, res) => {
+  var companyID = req.body.companyID
+  var carbon = req.body.carbon
+  var waste = req.body.waste
+  var sustainability = req.body.sustainability
+  if (!(0 <= carbon && carbon <= 10) && (0 <= waste && waste <= 10) && (0 <= sustainability && sustainability <= 10)){
+    return res.status(400).json({Error: "Please make sure carbon, waste and sustainability ratings are all between 0 and 10 (inclusive)"})
+  }
+  connection.none(`UPDATE users SET carbon_emissions = $1:value , waste_management = $2:value , sustainability_practices = $3:value WHERE userID = $4:value`, [carbon, waste, sustainability, companyID])
+  .then(
+    res.status(200).json({Message: "Company information succesfully updated."})
+  )
+  .catch((error) => {
+    console.log('ERROR:', error)
+    res.status(500).json({Error: "Inernal Server Error - Error updating user information"})
   })
 })
 
