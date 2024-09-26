@@ -6,6 +6,7 @@ const app = express() // creates an instance of express called app
 const port = 3000 //Only used to host locally for testing
 const pgp = require('pg-promise')(/* options */) // required postgresql connection based on https://expressjs.com/en/guide/database-integration.html#postgresql
 const fs = require('fs')
+const internal = require('stream')
 const sslInfo = {
     //cs: fs.readFileSync('./global-bundle.pem').toString(),
     rejectUnauthorized: false
@@ -96,7 +97,7 @@ app.put('/SendMoney', jsonParser, (req, res) => {
       console.log("ERROR in sending money", error)
       res.status(400).json({Message: `Something went wrong, please verify the specified accounts exist.`})
     })
-    
+
   }) .catch((error) => {
     console.log("Error occured when retrieving account balance: " + error)
     res.status(500).json({Error: "Internal Server Error - Error occured when retrieving account balance"})
@@ -105,30 +106,54 @@ app.put('/SendMoney', jsonParser, (req, res) => {
 })
 
 //Adds a user to the database using the parameters as the user's information.
-app.get('/AddAccount/:userID/:name/:balance/:greenscore/:carbon/:waste/:sustainability/:category', (req, res) => {
-  var userID = req.params.userID
-  var name = req.params.name
-  var balance = req.params.balance
-  var greenscore = req.params.greenscore
-  var carbon = req.params.carbon
-  var waste = req.params.waste
-  var sustainability = req.params.sustainability
-  var category = req.params.category
-  // Doing queries as below ensures they are not vulnerable to SQL Injection attacks,
-  // Please try do so in other queries
-  connection.one(`INSERT INTO users 
-    (userID, name, balance, 
-    Green_Score, streak, carbon_emissions, 
-    waste_management, sustainability_practices, category) 
-    VALUES ($1, $2, $3, 
-    $4, 0, $5, 
-    $6, $7, $8) 
-    RETURNING *;`, [userID, name, balance, greenscore, carbon, waste, sustainability, category])
+// This is very long and i did want to break up the fetching categories into its own function but it seemed to need to be async and then making it async didnt seem to help so idk :p
+app.post('/AddCompany', jsonParser, (req, res) => {
+  var name = req.body.name
+  var carbon = req.body.carbon
+  var waste = req.body.waste
+  var sustainability = req.body.sustainability
+  var category = req.body.category
+
+  // basic validation
+  if (!(0 <= carbon && carbon <= 10) && (0 <= waste && waste <= 10) && (0 <= sustainability && sustainability <= 10)){
+    return res.status(400).json({Error: "Please make sure carbon, waste and sustainability ratings are all between 0 and 10 (inclusive)"})
+  } else if (!(2 <= name.length && name.length <= 255)){
+    return res.status(400).json({Error: "Please make sure the companie name's length is between 2 & 255 (inclusive)"})
+  } 
+  // Fetching categories
+  connection.many(`SELECT DISTINCT category FROM users`)
   .then((data) => {
-    res.json(data)
+    var categories = new Array(data.length)
+    // Extract categories from returned data
+    for (let i = 0; i < data.length; i++) {
+      categories[i] = data[i].category
+    } 
+    // Validate provided category
+    if (!categories.includes(category)){
+      return res.status(400).json({Error: `Please make sure the category entered is one of the following: ${categories}`}) 
+    }
+    // Finally actually do the thing
+    // Doing queries as below ensures they are not vulnerable to SQL Injection attacks,
+    // Please try do so in other queries
+    connection.one(`INSERT INTO users 
+      (name, balance, 
+      Green_Score, streak, carbon_emissions, 
+      waste_management, sustainability_practices, category) 
+      VALUES ($1, 1000, 0, 
+      0, $2, 
+      $3, $4, $5) 
+      RETURNING *;`, [name, carbon, waste, sustainability, category])
+    .then(
+      res.status(200).json({Message: "Company successfully added."})
+    )
+    .catch((error) => {
+      console.log('ERROR:', error)
+      res.status(500).json({Error: "Inernal Server Error - Error adding company to database"})
+    })
   })
-  .catch((error) => {
-    console.log('ERROR:', error)
+  .catch ((error) => {
+    console.log("Error retrieving categories: " + error)
+    res.status(500).json({Error: "Internal Server Error - Error retrieving categories."})
   })
 })
 
