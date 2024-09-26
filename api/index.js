@@ -118,20 +118,24 @@ app.post('/AddCompany', jsonParser, (req, res) => {
   if (!(0 <= carbon && carbon <= 10) && (0 <= waste && waste <= 10) && (0 <= sustainability && sustainability <= 10)){
     return res.status(400).json({Error: "Please make sure carbon, waste and sustainability ratings are all between 0 and 10 (inclusive)"})
   } else if (!(2 <= name.length && name.length <= 255)){
-    return res.status(400).json({Error: "Please make sure the companie name's length is between 2 & 255 (inclusive)"})
+    return res.status(400).json({Error: "Please make sure the company name's length is between 2 & 255 (inclusive)"})
   } 
   // Fetching categories
   connection.many(`SELECT DISTINCT category FROM users`)
   .then((data) => {
-    var categories = new Array(data.length)
+    var categories = new Array()
     // Extract categories from returned data
     for (let i = 0; i < data.length; i++) {
-      categories[i] = data[i].category
+      if(data[i].category != null){
+        categories.push(data[i].category)
+      }
     } 
+    console.log(categories)
     // Validate provided category
     if (!categories.includes(category)){
       return res.status(400).json({Error: `Please make sure the category entered is one of the following: ${categories}`}) 
     }
+    /*
     // Finally actually do the thing
     // Doing queries as below ensures they are not vulnerable to SQL Injection attacks,
     // Please try do so in other queries
@@ -150,10 +154,33 @@ app.post('/AddCompany', jsonParser, (req, res) => {
       console.log('ERROR:', error)
       res.status(500).json({Error: "Inernal Server Error - Error adding company to database"})
     })
+      */
   })
   .catch ((error) => {
     console.log("Error retrieving categories: " + error)
     res.status(500).json({Error: "Internal Server Error - Error retrieving categories."})
+  })
+})
+
+app.post('/addUser', jsonParser, (req, res) => {
+  var name = req.body.name
+  // Validate
+  if (!(2 <= name.length && name.length <= 255)){
+    return res.status(400).json({Error: "Please make sure your name's length is between 2 & 255 (inclusive)"})
+  }
+  // Execute
+  connection.one(`INSERT INTO users 
+    (name, balance, 
+    Green_Score, streak) 
+    VALUES ($1, 0, 0, 
+    0) 
+    RETURNING *;`, name)
+  .then(
+    res.status(200).json({Message: "User successfully added."})
+  )
+  .catch((error) => {
+    console.log('ERROR:', error)
+    res.status(500).json({Error: "Inernal Server Error - Error adding user to database"})
   })
 })
 
