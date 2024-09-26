@@ -1,4 +1,6 @@
 const express = require('express') // Note to self: Go here if you forgot everything - https://expressjs.com/
+const bodyParser = require('body-parser') // added to allow parsing of body for post reqs
+const jsonParser = bodyParser.json() // needs to be passed in to post requests where the body is json
 //const serverless = require('serverless-http') // only needed for deploying onto AWS Lambda
 const app = express() // creates an instance of express called app
 const port = 3000 //Only used to host locally for testing
@@ -8,6 +10,7 @@ const sslInfo = {
     //cs: fs.readFileSync('./global-bundle.pem').toString(),
     rejectUnauthorized: false
 }
+
 
 const connInfo = {
     host: 'psql-db.cxqmy8c800g2.eu-west-2.rds.amazonaws.com',  // e.g., 'your-instance-name.region.rds.amazonaws.com'
@@ -57,15 +60,16 @@ app.get('/Account/:userID', (req, res) => {
   })
 })
 
-app.get('/AddNewPayee/:payerID/:payeeID', (req, res) => {
-
-  var payerID = req.params.payerID
-  var payeeID = req.params.payeeID
+app.post('/AddNewPayee', jsonParser, (req, res) => {
+  console.log(req.body)
+  var payerID = req.body.payerID
+  var payeeID = req.body.payeeID
   connection.one(`CALL add_new_payee($1, $2)`, [payerID, payeeID])
-  .then((data) => {
-    res.json(data)
-  })
+  .then( 
+    res.status(200).json({Message: "Payee was added successfully."})
+  )
   .catch((error) => {console.log("ITS OVER! $1", error)})
+  res.status(400).json({Error: "Something went wrong, please verify the specified accounts exist."})
 })
 
 app.get('/SendMoney/:payerID/:payeeID/:amount', (req, res) => {
