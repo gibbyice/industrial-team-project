@@ -33,40 +33,13 @@
                     <button class="btn btn-sm btn-danger payee-btn">Delete</button>
                 </div>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <img src="../icons/business.png" alt="Payee Icon" class="payee-icon me-3">
-                    <p>Green future groceries</p>
-                </div>
-                <div class="button-group">
-                    <button class="btn btn-sm btn-success payee-btn">Pay</button>
-                    <button class="btn btn-sm btn-danger payee-btn">Delete</button>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <img src="../icons/business.png" alt="Payee Icon" class="payee-icon me-3">
-                    <p>High tech gadgets</p>
-                </div>
-                <div class="button-group">
-                    <button class="btn btn-sm btn-success payee-btn">Pay</button>
-                    <button class="btn btn-sm btn-danger payee-btn">Delete</button>
-                </div>
-            </li>
+
+          <li class='list-group-item letter-header'>N</li> <!-- temporary for now, will be implemented properly when php fetches get added :D -->
+
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <img src="../icons/person.png" alt="Payee Icon" class="payee-icon me-3">
                     <p>Naomi Silver</p>
-                </div>
-                <div class="button-group">
-                    <button class="btn btn-sm btn-success payee-btn">Pay</button>
-                    <button class="btn btn-sm btn-danger payee-btn">Delete</button>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex align-items-center">
-                    <img src="../icons/business.png" alt="Payee Icon" class="payee-icon me-3">
-                    <p>Redfuel services</p>
                 </div>
                 <div class="button-group">
                     <button class="btn btn-sm btn-success payee-btn">Pay</button>
