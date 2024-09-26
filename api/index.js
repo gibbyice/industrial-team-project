@@ -37,7 +37,7 @@ app.get('/hello', (req, res) => {
 // Returns a user's greenscore based on the account number provided
 app.get('/:userID/greenscore', (req, res) => {
   var userID = req.params.userID
-  connection.one(`SELECT Green_Score FROM users WHERE userid = $1;`, userID)
+  connection.one(`SELECT Green_Score FROM users WHERE userid = $1:value;`, userID) // note to self :P using :value after the variable is a formatting filter to protect from sql injection - https://github.com/vitaly-t/pg-promise#formatting-filters
   .then((data) => {
     return res.status(200).json({data})
   })
@@ -50,7 +50,7 @@ app.get('/:userID/greenscore', (req, res) => {
 //Returns a user's information based on the user ID provided
 app.get('/Account/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.one(`SELECT * FROM users WHERE userid = $1;`, userID)
+  connection.one(`SELECT * FROM users WHERE userid = $1:value;`, userID)
   .then((data) => {
     res.json(data)
   })
@@ -60,6 +60,7 @@ app.get('/Account/:userID', (req, res) => {
   })
 })
 
+// allows a user to register a new payee
 app.post('/AddNewPayee', jsonParser, (req, res) => {
   var payerID = req.body.payerID
   var payeeID = req.body.payeeID
@@ -73,16 +74,33 @@ app.post('/AddNewPayee', jsonParser, (req, res) => {
   })
 })
 
-app.get('/SendMoney/:payerID/:payeeID/:amount', (req, res) => {
-  var payerID = req.params.payerID
-  var payeeID = req.params.payeeID
-  var amount = req.params.amount
-  connection.one(`CALL send_money($1, $2, $3);`)
-  .then((data) => {
-    console.log("Sent money to user: ", data)
-  })
-  .catch((error) => {
-    console.log("ERROR in sending money", error)
+// Sends money from 1 account to another
+app.put('/SendMoney', jsonParser, (req, res) => {
+  var payerID = req.body.payerID
+  var payeeID = req.body.payeeID
+  var amount = req.body.amount
+
+  // verifying sufficient funds in account
+  connection.one(`SELECT balance FROM users WHERE userid = $1:value;`, payerID)
+  .then( data => {
+    if (data.balance < amount){
+      return res.status(400).json({Error: "Insufficient funds in your account."})
+    }
+
+    // actually doing the transfer 
+    connection.one(`CALL send_money($1, $2, $3);`, [payerID, payeeID, amount])
+    .then(
+      res.status(200).json({Message: `Sent ${amount} to user ${payeeID} successfully.`})
+    )
+    .catch((error) => {
+      console.log("ERROR in sending money", error)
+      res.status(400).json({Message: `Something went wrong, please verify the specified accounts exist.`})
+    })
+    
+  }) .catch((error) => {
+    console.log("Error occured when retrieving account balance: " + error)
+    res.status(500).json({Error: "Internal Server Error - Error occured when retrieving account balance"})
+    return
   })
 })
 
