@@ -199,6 +199,101 @@ app.put('/UpdateCompanyRAG', jsonParser, (req, res) => {
   })
 })
 
+//Deletes account from database using the corresponding ID
+app.get('/DeleteAccount/:userID', (req, res) => {
+  var userID = req.params.userID
+  connection.one(`DELETE FROM users
+    WHERE userID = $1 
+    RETURNING *;`,userID)
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((error) => {
+    console.log('ERROR: ', error)
+  })
+})
+
+//Searches for all payments the user has made
+app.get('/Transactions/Payer/:userID', (req, res) => {
+  var userID = req.params.userID
+  connection.one(`SELECT * FROM transactions WHERE payerid = ${userID} ORDER BY date DESC;`)
+  .then((data) => {
+    res.json(data)
+  })
+  .catch ((error) => {
+    console.log( `ERROR: `, error)
+  })
+})
+
+//Searches for all payments the user has received
+app.get('/Transactions/Payee/:userID', (req, res) => {
+  var userID = req.params.userID
+  connection.one(`SELECT * FROM transactions WHERE payeeid = ${userID} ORDER BY date DESC;`)
+  .then((data) => {
+    res.json(data)
+  })
+  .catch ((error) => {
+    console.log( `ERROR: `, error)
+  })
+})
+
+//Searches for all transactions the user has made
+app.get('/Transactions/all/:userID', (req, res) => {
+  var userID = req.params.userID
+  connection.any(`SELECT * FROM transactions WHERE payerid = ${userID} OR payeeid = ${userID} ORDER BY date DESC;`)
+  .then((data) => {
+    res.json(data)
+  })
+  .catch ((error) => {
+    console.log( `ERROR: `, error)
+  })
+})
+
+//Adds a reward to the account reward table when when it is available to a user (i.e. when their green score is high enough)
+app.get('/AddReward/:accountID/:rewardID', (req, res) => {
+  var accountID = req.params.accountID
+  var rewardID = req.params.rewardID
+  connection.one(`INSERT INTO account_reward 
+    (accountID, rewardID) VALUES ($1, $2)
+    RETURNING *;`,[accountID, rewardID])
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((error) => {
+    console.log(`ERROR: `, error)
+  })
+})
+
+//Searches for all rewards that are available to the user
+app.get('/ViewRewards/:accountID', (req, res) => {
+  var accountID = req.params.accountID
+  connection.any(`SELECT *
+    FROM rewards
+    JOIN account_reward ON rewards.rewardid = account_reward.rewardid
+    WHERE account_reward.accountid = $1;`,accountID)
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((error) => {
+    console.log(`ERROR: `, error)
+  })
+})
+
+//Deletes entry from account reward table when user claims a reward
+app.get('/ClaimReward/:accountID/:rewardID', (req, res) => {
+  var accountID = req.params.accountID
+  var rewardID = req.params.rewardID
+  connection.one(`DELETE FROM account_reward
+    WHERE account_reward.accountid = $1
+    AND account_reward.rewardid = $2 RETURNING *;`,[accountID,rewardID])
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((error) => {
+    console.log(`ERROR: `, error)
+  })
+})
+
 // Catches all requests to non existant routes, MUST be after all other routes
 app.all('*', (req, res) => {
   res.status(404).json({Error: "no such route exists"})
