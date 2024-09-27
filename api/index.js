@@ -1,6 +1,7 @@
 const express = require('express') // Note to self: Go here if you forgot everything - https://expressjs.com/
 const bodyParser = require('body-parser') // added to allow parsing of body for post reqs
 const jsonParser = bodyParser.json() // needs to be passed in to post requests where the body is json
+const cors = require('cors')
 //const serverless = require('serverless-http') // only needed for deploying onto AWS Lambda
 const app = express() // creates an instance of express called app
 const port = 3000 //Only used to host locally for testing
@@ -11,7 +12,7 @@ const sslInfo = {
     //cs: fs.readFileSync('./global-bundle.pem').toString(),
     rejectUnauthorized: false
 }
-
+app.use(cors());
 
 const connInfo = {
     host: 'psql-db.cxqmy8c800g2.eu-west-2.rds.amazonaws.com',  // e.g., 'your-instance-name.region.rds.amazonaws.com'
