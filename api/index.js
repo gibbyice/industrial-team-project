@@ -36,6 +36,19 @@ app.get('/hello', (req, res) => {
     res.send('hello :)')
 })
 
+// Checks if a user with a given ID exists, returns 200 if there is and 404 if not
+app.get('/checkLogin/:userID', (req, res) => {
+  var userID = req.params.userID
+  connection.one('SELECT * FROM users WHERE userID = $1', userID)
+  .then(
+    res.status(200)
+  )
+  .catch((error) => {
+    console.log("User does not exist")
+    res.status(404).json({Error: `No user with ID ${userID} exists.`})
+  })
+})
+
 // Returns a user's greenscore based on the account number provided
 app.get('/:userID/greenscore', (req, res) => {
   var userID = req.params.userID
