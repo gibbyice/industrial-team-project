@@ -294,6 +294,20 @@ app.get('/ClaimReward/:accountID/:rewardID', (req, res) => {
   })
 })
 
+// Fetches top 3 options in category
+app.get('/:category/:userID/BetterOptions', (req, res) => {
+  var userID = req.params.userID
+  var category = req.params.category
+  connection.many('SELECT * FROM users WHERE userID != $1:value AND category = $2 ORDER BY carbon_emissions + waste_management + sustainability_practices DESC LIMIT 3', [userID, category])
+  .then((data) => {
+    res.status(200).json(data)
+  })
+  .catch ((error) => {
+    console.log("Error getting best oprions in category: " + error)
+    res.status(500).json({Error: "Internal Server Error - Failed to retreive options from database"})
+  })
+})
+
 // Catches all requests to non existant routes, MUST be after all other routes
 app.all('*', (req, res) => {
   res.status(404).json({Error: "no such route exists"})
