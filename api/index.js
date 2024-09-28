@@ -36,6 +36,23 @@ app.get('/hello', (req, res) => {
     res.send('hello :)')
 })
 
+app.get('/confirmID/:userID', (req, res) => {  
+  var userID = req.params.userID
+  connnecttion.one('SELECT EXISTS(SELECT userid FROM users WHERE userid = $1', userID)
+  .then((data) => {
+    console.log(data)
+    if (data.exists === 't') {
+      res.status(200)
+    } else {
+      res.status(400).json({Error: 'no user with specified ID'})  
+    }
+      
+  })
+  .catch((error) => {
+    res.status(404).json({Error: 'Error in querying server'})  
+  })  
+})
+
 // Checks if a user with a given ID exists, returns 200 if there is and 404 if not
 app.get('/checkLogin/:userID', (req, res) => {
   var userID = req.params.userID
