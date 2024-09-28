@@ -208,3 +208,20 @@ button.payee-btn.btn-danger {
 }
 
 /* ------------------------- ADD PYMT DETAILS STYLING ----------------------------- */
+
+/* ------------------------- ADD NEW PAYEE STYLING ----------------------------- */
+
+.display-unit {
+  background-color: #f44336; 
+  color: white;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  width: 720px;
+  height: 80px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------------- ADD NEW PAYEE STYLING ----------------------------- */

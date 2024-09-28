@@ -13,3 +13,8 @@ function editDetails() {
     document.getElementById('confirmation').classList.add('hidden');
     document.getElementById('payment-form').classList.remove('hidden');
 }
+
+function confirmPayee() {
+    document.getElementById('payee-form').classList.add('hidden');
+    document.getElementById('showAccount').classList.remove('hidden');
+}
