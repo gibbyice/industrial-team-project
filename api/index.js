@@ -57,11 +57,12 @@ app.get('/confirmID/:userID', (req, res) => {
 app.get('/checkLogin/:userID', (req, res) => {
   var userID = req.params.userID
   connection.one('SELECT * FROM users WHERE userID = $1', userID)
-  .then(
-    res.status(200)
-  )
+  .then(( data ) => {
+    console.log("Account found - " + userID)
+    res.status(200).json({Message: `Account found`})
+  })
   .catch((error) => {
-    console.log("User does not exist")
+    console.log("User does not exist - " + userID)
     res.status(404).json({Error: `No user with ID ${userID} exists.`})
   })
 })
@@ -197,15 +198,13 @@ app.post('/addUser', jsonParser, (req, res) => {
     return res.status(400).json({Error: "Please make sure your name's length is between 2 & 255 (inclusive)"})
   }
   // Execute
-  connection.one(`INSERT INTO users 
-    (name, balance, 
-    Green_Score, streak, category) 
-    VALUES ($1, 0, 0, 
-    0, 'User') 
+  connection.one(`INSERT INTO users (name, balance, Green_Score, streak, category) 
+    VALUES ($1, 0, 0, 0, 'User') 
     RETURNING *;`, name)
-  .then(
-    res.status(200).json({Message: "User successfully added."})
-  )
+  .then((data) => {
+    console.log(data)
+    res.status(200).json({Message: "User successfully added.", userID: `${data.userid}`})
+  })
   .catch((error) => {
     console.log('ERROR:', error)
     res.status(500).json({Error: "Inernal Server Error - Error adding user to database"})
