@@ -56,7 +56,7 @@
                     <h3>Sustainability practices: 2/10</h3>
                 </div>
                 <div class="d-flex confirmation-btns mt-5">
-                    <button class="btn btn-secondary payment-form-btn" onclick="editDetails()">Go Back</button>
+                    <button class="btn btn-secondary payment-form-btn" onclick="goBack()">Go Back</button>
                     <button class="btn btn-success payment-form-btn">Confirm</button>
                 </div>
             </div>
