@@ -338,6 +338,19 @@ app.get('/:category/:userID/BetterOptions', (req, res) => {
   })
 })
 
+// Gets all saved payees for a user
+app.get('/:userID/getPayees', (req, res) => {
+  var userID = req.params.userID
+  connection.many('SELECT payeeid, name FROM user_payee JOIN users ON userid = payeeid WHERE payerid = $1:value ORDER BY name;', userID)
+  .then((data) => {
+    res.status(200).json({data})
+  })
+  .catch ((error) => {
+    console.log(`Error getting payees for user ${userID}`)
+    res.status(500).json({Error: `Internal Server Error - Error getting payees for user ${userID}`})
+  })
+})
+
 // Catches all requests to non existant routes, MUST be after all other routes
 app.all('*', (req, res) => {
   res.status(404).json({Error: "no such route exists"})
