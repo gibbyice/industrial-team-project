@@ -22,12 +22,13 @@
       <div class="buttons">
         <div class="d-grid gap-2">
           <button class="btn btn-outline-light dynamic-button" type="button" onclick="window.location.href='faq.php';">FAQ</button>
-          <button class="btn btn-outline-light dynamic-button" type="button">Log out</button>
+          <button class="btn btn-outline-light dynamic-button" type="button" onclick="logout()">Log out</button>
         </div>
       </div>
     </div>
 
     <div class="manual-spacer" style="height: 170px;"></div> <!-- non-elegant solution to not having content hidden behind the navbar :) but if it's stupid but works it ain't stupid -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../scripts/settings.js"></script>
   </body>
 </html>
