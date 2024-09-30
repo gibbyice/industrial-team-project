@@ -1,6 +1,7 @@
 /* ---------------------------------- FONTS --------------------------------------- */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 .oswald-title {
   font-family: 'Oswald', sans-serif;
@@ -48,7 +49,7 @@
 
 @media (min-width: 768px) { /* tablet/phone screens */
   .scaling-title-text {
-    font-size: clamp(100px, 8vw, 140px); /* min size, viewport width (how it scales), max size  */
+    font-size: clamp(100px, 8vw, 120px); /* min size, viewport width (how it scales), max size  */
   }
   .scaling-body-text {
     font-size: clamp(40px, 2.5vw, 55px);
@@ -60,7 +61,7 @@
 
 @media (min-width: 1200px) {
   .scaling-title-text {
-    font-size: clamp(140px, 6vw, 160px);
+    font-size: clamp(100px, 6vw, 160px);
   }
   .scaling-body-text {
     font-size: clamp(50px, 2vw, 75px);
@@ -77,6 +78,12 @@
   width: 95%;
   padding-left: 15px;
 }
+
+.scaling-logo {
+  width: clamp(150px, 10vw, 200px);
+  height: auto;
+}
+
 
 /* --------------------------- RESPONSIVE ELEMENTS -------------------------------- */
 
@@ -220,7 +227,7 @@ button.payee-btn.btn-danger {
 .parent {
     min-height: 80vh;
 }
-  
+
 .middle-divider {
     margin: 10vh 0px;
 }
@@ -249,10 +256,10 @@ button.payee-btn.btn-danger {
 }
 
 /* ------------------------------- LOGIN STYLING ---------------------------------- */
-/* ------------------------- ADD NEW PAYEE STYLING ----------------------------- */
+/* ---------------------------- ADD NEW PAYEE STYLING ----------------------------- */
 
 .display-unit {
-  background-color: #f44336; 
+  background-color: #f44336;
   color: white;
   padding: 10px;
   margin: 10px 0;
@@ -264,4 +271,50 @@ button.payee-btn.btn-danger {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* ------------------------- ADD NEW PAYEE STYLING ----------------------------- */
+/* ----------------------------- ADD NEW PAYEE STYLING ----------------------------- */
+
+/* --------------------------- GREEN SCORE PAGE STYLING ---------------------------- */
+
+.green-score-card, .reward-card {
+    background-color: rgb(43, 48, 53);
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.green-score-progress {
+    height: 40px;
+    background-color: #e9ecef;
+}
+
+.reward-card img {
+    width: 60px;
+    height: 60px;
+}
+
+.reward-card hr {
+    border-color: #ccc;
+}
+
+.green-score-card h3, .reward-card h4, .reward-card p, .reward-card small {
+    font-size: 2.2rem;
+}
+
+.green-score-card p {
+    font-size: 1.8rem;
+}
+
+.green-score-card {
+    min-height: 180px;
+}
+
+.reward-card {
+    min-height: 250px;
+}
+
+/* --------------------------- GREEN SCORE PAGE STYLING ---------------------------- */

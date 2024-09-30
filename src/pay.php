@@ -29,7 +29,7 @@
                     <p>Eco farm produce</p>
                 </div>
                 <div class="button-group">
-                    <button class="btn btn-sm btn-success payee-btn">Pay</button>
+                    <a href="addDetails.php"><button class="btn btn-sm btn-success payee-btn">Pay</button></a>
                     <button class="btn btn-sm btn-danger payee-btn">Delete</button>
                 </div>
             </li>
@@ -42,7 +42,7 @@
                     <p>Naomi Silver</p>
                 </div>
                 <div class="button-group">
-                    <button class="btn btn-sm btn-success payee-btn">Pay</button>
+                    <a href="addDetails.php"><button class="btn btn-sm btn-success payee-btn">Pay</button></a>
                     <button class="btn btn-sm btn-danger payee-btn">Delete</button>
                 </div>
             </li>

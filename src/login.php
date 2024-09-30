@@ -7,17 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/style.css">
 
-    <!-- Title font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
     <body>
 
         <div class="title-container">
             <div class="title">
-                <h1 class="company-title scaling-title-text mb-0">Pay-Per Trail <img class = "mb-4" src="icons/logo.png" alt="company logo" width="200" height="200" class="mb-3"></h1>
+                <h1 class="company-title scaling-title-text mb-0">Pay-Per Trail <img class = "mb-4 scaling-logo" src="icons/logo.png" alt="company logo" width="200" height="200" class="mb-3"></h1>
             </div>
             <div class="divider"></div>
         </div>
@@ -69,8 +65,8 @@
                 </div>
 
             </div>
-            
-            
+
+
         </div>
     </body>
 </html>
