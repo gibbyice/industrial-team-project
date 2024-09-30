@@ -38,7 +38,7 @@ app.get('/hello', (req, res) => {
 
 app.get('/confirmID/:userID', (req, res) => {  
   var userID = req.params.userID
-  connnecttion.one('SELECT EXISTS(SELECT userid FROM users WHERE userid = $1', userID)
+  connection.one('SELECT EXISTS(SELECT userid FROM users WHERE userid = $1', userID)
   .then((data) => {
     console.log(data)
     if (data.exists === 't') {
