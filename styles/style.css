@@ -19,6 +19,12 @@
   font-weight: 400;
 }
 
+.company-title {
+  font-family: "Pacifico", cursive;
+  font-style: normal;
+  font-size: 38px;
+}
+
 /* ---------------------------------- FONTS --------------------------------------- */
 
 /* --------------------------- RESPONSIVE ELEMENTS -------------------------------- */
@@ -111,7 +117,7 @@ body {
 /* ---------------------------- PAYEE LIST STYLING -------------------------------- */
 
 .payee-list {
-  max-width: 85%
+  max-width: 85%;
   margin: 0 auto;
 }
 
@@ -208,3 +214,38 @@ button.payee-btn.btn-danger {
 }
 
 /* ------------------------- ADD PYMT DETAILS STYLING ----------------------------- */
+
+/* ------------------------------- LOGIN STYLING ---------------------------------- */
+
+.parent {
+    min-height: 80vh;
+}
+  
+.middle-divider {
+    margin: 10vh 0px;
+}
+
+.login-form-box {
+    width: 80%;
+    max-width: 800px;
+    background-color: rgb(43, 48, 53);
+    padding: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin: auto;
+}
+
+.login-form-btn {
+    padding: 4px;
+    width: 100%;
+}
+
+.login-divider {
+  width: 85%;
+  background-color: white;
+  height: 5px;
+  margin: 0 auto 20px auto;
+  border-radius: 10px;
+}
+
+/* ------------------------------- LOGIN STYLING ---------------------------------- */
