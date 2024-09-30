@@ -341,7 +341,7 @@ app.get('/:category/:userID/BetterOptions', (req, res) => {
 // Gets all saved payees for a user
 app.get('/:userID/getPayees', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT payeeid, name FROM user_payee JOIN users ON userid = payeeid WHERE payerid = $1:value ORDER BY name;', userID)
+  connection.many('SELECT payeeid, name, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM user_payee JOIN users ON userid = payeeid WHERE payerid = $1:value ORDER BY name;', userID)
   .then((data) => {
     res.status(200).json({data})
   })
