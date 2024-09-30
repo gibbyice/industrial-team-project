@@ -346,7 +346,11 @@ app.get('/:userID/getPayees', (req, res) => {
     res.status(200).json({data})
   })
   .catch ((error) => {
-    console.log(`Error getting payees for user ${userID}`)
+    if (error.code === 0){
+      res.status(404).json({Message: `no payees exist for user ${userID}`})
+      return 
+    }
+    console.log(`Error getting payees for user ${userID}:` + error)
     res.status(500).json({Error: `Internal Server Error - Error getting payees for user ${userID}`})
   })
 })
