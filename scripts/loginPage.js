@@ -1,4 +1,4 @@
-const APIaddress = "http://34.207.167.129:3000/";
+const APIaddress = "http://34.201.132.70:3000/";
 
 // Note this is incredibly easy to bypass by simply running localStorage.setItem("accountID", insert whatever you want here)
 // but since security isnt a focus of this project i dont care <3
