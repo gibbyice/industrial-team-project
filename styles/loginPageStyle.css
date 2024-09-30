@@ -17,13 +17,12 @@
 /* ------------------------------- TITLE STYLING ---------------------------------- */
 
 /* ---------------------------------- FONTS --------------------------------------- */
+
 .company-title {
     font-family: "Pacifico", cursive;
     font-style: normal;
     font-size: 38px;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 
 .oswald-title {
   font-family: 'Oswald', sans-serif;
@@ -47,13 +46,14 @@ body {
     color: white;
     background-color: rgb(62, 70, 78);
 }
+
 /* ---------------------------------- FONTS --------------------------------------- */
 
 /* ------------------------------- BODY STYLING ----------------------------------- */
 .parent {
     min-height: 80vh;
 }
-  
+
 .middle-divider {
     margin: 10vh 0px;
 }
