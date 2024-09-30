@@ -8,21 +8,22 @@
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 
-    <body>
-        <?php
-        require 'navbar.html';
-        ?>
+<body>
+    <?php
+    require 'navbar.html';
+    ?>
 
+    <div id="payee-form">
         <div class="title-container">
             <div class="title">
                 <h1 class="oswaldMedium scaling-title-text">Add New Payee</h1>
             </div>
             <div class="divider"></div>
         </div>
-        <div id="payment-form" class="payment-form-container">
+        <div class="payment-form-container">
             <div class="payment-form-box">
                 <h3 class="me-3"><strong>New Payee Details</strong></h3>
-                <form action="#" onsubmit="showConfirmation(); return false;">
+                <form action="#" onsubmit="confirmPayee(); return false;">
                     <div class="mt-3">
                         <input type="text" class="form-control" id="accNum" name="accNum" placeholder="Name or Account Number" required>
                     </div>
@@ -32,8 +33,38 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div id="showAccount" class="hidden">
+        <div class="title-container">
+            <div class="title">
+                <h1 class="oswaldMedium scaling-title-text">Do these details look correct?</h1>
+            </div>
+            <div class="divider"></div>
+        </div>
+        <div id="showAccount" class="payment-form-container">
+            <div class="payment-form-box">
+                <h3 class="mb-5 text-center">Name: <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Carbon Heavy Fashion</h3>
+                <div class="display-unit" id="ce">
+                    <h3>Carbon emissions: 2/10</h3>
+                </div>
 
-    </body>
+                <div class="display-unit" id="wm">
+                    <h3>Waste management: 3/10</h3>
+                </div>
+
+                <div class="display-unit" id="sp">
+                    <h3>Sustainability practices: 2/10</h3>
+                </div>
+                <div class="d-flex confirmation-btns mt-5">
+                    <button class="btn btn-secondary payment-form-btn" onclick="goBack()">Go Back</button>
+                    <button class="btn btn-success payment-form-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="../scripts/payment.js"></script>
