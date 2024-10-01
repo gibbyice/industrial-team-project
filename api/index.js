@@ -123,7 +123,10 @@ app.put('/SendMoney', jsonParser, (req, res) => {
     // actually doing the transfer 
     connection.one(`CALL send_money($1, $2, $3);`, [payerID, payeeID, amount])
     .then(
-      res.status(200).json({Message: `Sent ${amount} to user ${payeeID} successfully.`})
+      
+      connection.one(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
+      .then(res.status(200).json({Message: `Sent ${amount} to user ${payeeID} successfully.`}))
+      .catch(res.status(200).json({Message: `Sent ${amount} to user ${payeeID}, but error in adding xp`}))
     )
     .catch((error) => {
       console.log("ERROR in sending money", error)
