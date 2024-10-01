@@ -300,7 +300,7 @@ app.get('/AddReward/:accountID/:rewardID', (req, res) => {
 //Searches for all rewards that are available to the user
 app.get('/ViewRewards/:accountID', (req, res) => {
   var accountID = req.params.accountID
-  connection.any(`SELECT *
+  connection.any(`SELECT name, expiry, min_level
     FROM rewards
     JOIN account_reward ON rewards.rewardid = account_reward.rewardid
     WHERE account_reward.accountid = $1;`,accountID)
