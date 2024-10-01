@@ -13,14 +13,14 @@
 
     <div class="title-container">
       <div class="title">
-          <h1 class="oswaldMedium scaling-title-text">Add payment details</h1>
+          <h1 class="oswaldMedium scaling-title-text" id="payee-id">Add payment details</h1>
       </div>
       <div class="divider"></div>
     </div>
 
     <div id="payment-form" class="payment-form-container">
         <div class="payment-form-box">
-            <h3>To: <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3"><strong>High tech gadgets</strong></h3>
+            <h3>To: <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3"><strong><?php echo $_GET['payeeName']; ?></strong></h3>
             <form action="#" onsubmit="showConfirmation(); return false;">
                 <div class="mb-3">
                     <label for="amount" class="form-label">Amount:</label>
@@ -38,14 +38,14 @@
     <div id="confirmation" class="payment-form-container hidden">
         <div class="payment-form-box">
             <h3>From: <img src="icons/person.png" alt="User Icon" class="payee-icon me-3"><strong>Ross F</strong></h3>
-            <h3>To: <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3"><strong>High tech gadgets</strong></h3>
+            <h3>To: <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3"><strong><?php echo $_GET['payeeName']; ?></strong></h3>
             <div class="confirm-details">
               <h3> Amount: <strong id="confirm-amount">£0.00</strong><br></h3>
               <h3> Reference: <strong id="confirm-reference">None</strong></h3>
             </div>
             <div class="d-flex confirmation-btns">
                 <button class="btn btn-secondary payment-form-btn" onclick="editDetails()">Edit</button>
-                <button class="btn btn-success payment-form-btn">Confirm</button>
+                <button class="btn btn-success payment-form-btn" onclick="makeTransaction()">Confirm</button>
             </div>
         </div>
     </div>
