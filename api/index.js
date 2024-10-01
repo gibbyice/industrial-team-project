@@ -1,4 +1,4 @@
-const express = require('express') // Note to self: Go here if you forgot everything - https://expressjs.com/
+xconst express = require('express') // Note to self: Go here if you forgot everything - https://expressjs.com/
 const bodyParser = require('body-parser') // added to allow parsing of body for post reqs
 const jsonParser = bodyParser.json() // needs to be passed in to post requests where the body is json
 const cors = require('cors')
@@ -38,18 +38,21 @@ app.get('/hello', (req, res) => {
 
 app.get('/confirmID/:userID', (req, res) => {  
   var userID = req.params.userID
-  connection.one('SELECT EXISTS(SELECT userid FROM users WHERE userid = $1', userID)
+  connection.one('SELECT name, category, carbon_emissions, waste_management, sustainability_practices FROM users WHERE userid = $1', userID)
   .then((data) => {
-    console.log(data)
-    if (data.exists === 't') {
-      res.status(200)
+    if (data.hasOwnProperty('category')) {
+      res.status(200).json({name: data.name, ce: data.carbon_emissions, wm: data.waste_management, sp: data.sustainability_practices, category: data.category})
     } else {
       res.status(400).json({Error: 'no user with specified ID'})  
     }
       
   })
   .catch((error) => {
-    res.status(404).json({Error: 'Error in querying server'})  
+    if (error.code = 'queryResultError.noData') {
+      res.status(404).json({Error: 'no user with specified ID'})
+    } else {
+	res.status(500).json({Error: 'Error in querying server'})  
+    }
   })  
 })
 
