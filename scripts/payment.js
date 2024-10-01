@@ -14,11 +14,6 @@ function editDetails() {
     document.getElementById('payment-form').classList.remove('hidden');
 }
 
-function confirmPayee() {
-    document.getElementById('payee-form').classList.add('hidden');
-    document.getElementById('showAccount').classList.remove('hidden');
-}
-
 function goBack() {
     document.getElementById('showAccount').classList.add('hidden');
     document.getElementById('payee-form').classList.remove('hidden');
