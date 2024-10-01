@@ -354,6 +354,21 @@ app.get('/:userID/getPayees', (req, res) => {
   })
 })
 
+// Deletes payee from a user's payee list
+app.get('/:userID/:payeeID/deletePayee', (req, res) => {
+  var userID = req.params.userID
+  var payeeID = req.params.payeeID
+  connection.one('DELETE FROM user_payee WHERE payeeid = $1 AND payerid = $2 RETURNING *;', [payeeID, userID])
+  .then((data) => {
+    res.status(200).json({data})
+  })
+  .catch ((error) => {
+    console.log(`Error deleting payee ${payeeID} for user ${userID}`)
+    res.status(500).json({Error: `Internal Server Error - Error deleting payee ${payeeID} for user ${userID}`})
+  })
+})
+
+
 // Catches all requests to non existant routes, MUST be after all other routes
 app.all('*', (req, res) => {
   res.status(404).json({Error: "no such route exists"})
