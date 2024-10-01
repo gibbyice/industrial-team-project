@@ -23,7 +23,7 @@
             <div class="col-12">
 
                 <!-- Login -->
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="payment-form-box">
                         <h3 class="me-3"><strong>Login</strong></h3>
                         <form action="#" id="loginForm" onsubmit="login(); return false;">
@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- Register -->
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="payment-form-box">
                         <h3 class="me-3"><strong>Register</strong></h3>
                         <form action="#" id="regForm" onsubmit="register(); return false;">
