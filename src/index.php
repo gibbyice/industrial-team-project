@@ -11,7 +11,6 @@
       require 'navbar.html';
     ?>
 
-    <!-- Title Section -->
     <div class="title-container">
       <div class="title">
         <h1 class="company-title scaling-title-text">Pay-Per Trail <img class="mb-4 scaling-logo" src="icons/logo.png" alt="company logo"></h1>
