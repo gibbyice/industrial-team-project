@@ -265,7 +265,7 @@ button.payee-btn.btn-danger {
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
-  width: 720px;
+  width: auto;
   height: 80px;
   text-align: center;
   font-size: 18px;
