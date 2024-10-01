@@ -24,7 +24,7 @@
             <form action="#" onsubmit="showConfirmation(); return false;">
                 <div class="mb-3">
                     <label for="amount" class="form-label">Amount:</label>
-                    <input type="number" class="form-control" id="amount" name="amount" placeholder="£0.00" required>
+                    <input type="decimal" class="form-control" id="amount" name="amount" placeholder="£0.00" required>
                 </div>
                 <div class="mb-3">
                     <label for="reference" class="form-label">Reference:</label>
