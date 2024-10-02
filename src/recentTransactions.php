@@ -21,7 +21,7 @@
     </div>
     <div class="fluid container mt-5">
         <h1>Account Balance: </h1><br />
-        <h1 class="oswaldMedium scaling-title-text">£1101.65</h1>
+        <h1 class="oswaldMedium scaling-title-text" id="balance"></h1>
         <div class="divider mt-5"></div>
         <div class="row justify confirmation-btns mt-5">
             <div class="col-6">
@@ -45,35 +45,9 @@
                 </nav>
             </div>
         </div>
-        <div class="payment-form-box mt-4">
+        <div class="payment-form-box mt-4" id = "transaction-list">
             <div class="display-unit" id="ce">
                 <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Red Fuel Services -£10</h3>
-            </div>
-
-            <div class="display-unit" id="wm">
-                <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Carbon Heavy Fashion -£10</h3>
-            </div>
-
-            <div class="display-unit" id="sp">
-                <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Carbon Heavy Fashion -£10</h3>
-            </div>
-            <div class="display-unit" id="person">
-                <h3 class="mb-5 text-center"><img src="icons/person.png" alt="User Icon" class="payee-icon me-3">Naomi S -£10</h3>
-            </div>
-            <div class="display-unit" id="sp">
-                <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Carbon Heavy Fashion -£10</h3>
-            </div>
-            <div class="display-unit" id="sp">
-                <h3 class="mb-5 text-center"><img src="icons/person.png" alt="User Icon" class="payee-icon me-3">Ananya B -£20</h3>
-            </div>
-            <div class="display-unit" id="sp">
-                <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Carbon Heavy Fashion -£10</h3>
-            </div>
-            <div class="display-unit" id="sp">
-                <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Carbon Heavy Fashion -£10</h3>
-            </div>
-            <div class="display-unit" id="sp">
-                <h3 class="mb-5 text-center"><img src="icons/person.png" alt="User Icon" class="payee-icon me-3">Ross F -£15</h3>
             </div>
         </div>
 
@@ -155,5 +129,6 @@
         carouselInstance.to(0);
     });
 </script>
+<script src="../scripts/RecentTransactions.js"></script>
 
 </html>

@@ -59,7 +59,7 @@ function makeTransaction() {
             return response.json();
         })
         .then(data => {
-            console.log("success")success")
+            console.log("success")
 			window.location.replace("../src/faq.php")
         })
         .catch(error => {
