@@ -76,10 +76,10 @@
                 <h3 class="mb-5 text-center"><img src="icons/person.png" alt="User Icon" class="payee-icon me-3">Ross F -£15</h3>
             </div>
         </div>
-        
+
         <!-- Pop-up modal to show transaction details -->
         <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; max-height: 80vh">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; min-height: 100%">
                 <div class="modal-content" style="background-color: rgb(43, 48, 53);">
                     <div class="modal-header">
                         <h5 class="modal-title" id="transactionModalLabel">Transaction details</h5>
@@ -95,23 +95,36 @@
                             <div class="score-item bg-warning mt-3 text-center">Waste management: 4/10</div>
                             <div class="score-item bg-danger mt-3 text-center">Sustainability practices: 2/10</div>
                         </div>
-                        <div id="carouselExample" class="carousel slide my-5">
+
+                        <div id="altCompanies" class="carousel slide my-5">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                  
+                                    <div class="card green-score-card">
+                                        <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
+                                            <h5 class="text-center">Alternative Company 1</h5>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="..." class="d-block w-100" alt="...">
+                                    <div class="card green-score-card">
+                                        <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
+                                            <h5 class="text-center">Alternative Company 2</h5>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="..." class="d-block w-100" alt="...">
+                                    <div class="card green-score-card">
+                                        <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
+                                            <h5 class="text-center">Alternative Company 3</h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#altCompanies" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#altCompanies" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
@@ -133,6 +146,13 @@
             var showDetailsModal = new bootstrap.Modal(document.getElementById('transactionModal'));
             showDetailsModal.show();
         });
+    });
+
+    // Resetting the carousel to its first frame
+    document.getElementById('transactionModal').addEventListener('shown.bs.modal', function() {
+        var carousel = document.querySelector('#altCompanies');
+        var carouselInstance = new bootstrap.Carousel(carousel);
+        carouselInstance.to(0);
     });
 </script>
 
