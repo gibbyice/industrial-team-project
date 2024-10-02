@@ -9,7 +9,12 @@ function redirect(){
 function fetchPayees(){
     userID = localStorage.getItem("accountID")
     console.log("fetching payees!")
-    activeFirstChar = "" // init to "" to make sure the first payee always spawns a divider
+    activeFirstChar = "" // init to "" to make sure the first payee always spawns a divider	
+	payeeList = document.createElement("ul");
+	payeeList.setAttribute('class', 'list-group-payee-list')
+	payeeList.setAttribute('id', 'payee-list')
+	payeeListContainer = document.getElementById('payee-list-container') // Get payee list
+    payeeListContainer.appendChild(payeeList)
 
     // Make a GET request
     fetch(APIaddress+`${userID}/getPayees`)
@@ -122,11 +127,17 @@ function generatePayeeListItem(data){
 			.then(data => {
 				console.log("in the good");
 				console.log(data);
+				payeeList.remove();
+				payeeList = document.createElement("ul");
+				payeeList.setAttribute('class', 'list-group-payee-list')
+				payeeList.setAttribute('id', 'payee-list')
+				fetchPayees();
 			})
 			.catch(error => {
 				console.error('Error:', error);
 			})
 	}
+
 
     btnGroup = document.createElement("div")
     btnGroup.setAttribute('class', 'button-group')

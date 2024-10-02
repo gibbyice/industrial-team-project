@@ -37,9 +37,9 @@ function makeTransaction() {
 	requestBody = {
         "payerID" : localStorage.getItem("accountID"),
 		"payeeID" : ID,
-		"amount" : amount
+		"amount" : amount,
+		"reference" : reference
     }
-	
 	
     requestOptions = {
         method: 'PUT',
@@ -59,7 +59,8 @@ function makeTransaction() {
             return response.json();
         })
         .then(data => {
-            console.log("success")
+            console.log("success")success")
+			window.location.replace("../src/faq.php")
         })
         .catch(error => {
             console.error('Error:', error);
