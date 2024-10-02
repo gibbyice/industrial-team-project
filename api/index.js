@@ -115,7 +115,7 @@ app.put('/SendMoney', jsonParser, (req, res) => {
   var payerID = req.body.payerID
   var payeeID = req.body.payeeID
   var amount = req.body.amount
-
+  var reference = req.body.reference
   // verifying sufficient funds in account
   connection.one(`SELECT balance FROM users WHERE userid = $1:value;`, payerID)
   .then( data => {
@@ -124,7 +124,7 @@ app.put('/SendMoney', jsonParser, (req, res) => {
     }
 
     // actually doing the transfer 
-    connection.one(`CALL send_money($1, $2, $3);`, [payerID, payeeID, amount])
+    connection.one(`CALL send_money($1, $2, $3, $4);`, [payerID, payeeID, amount, reference])
     .then(
       
       connection.one(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
