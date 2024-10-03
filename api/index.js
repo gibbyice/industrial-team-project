@@ -119,7 +119,7 @@ app.put('/SendMoney', jsonParser, (req, res) => {
 
   connection.one(`SELECT balance FROM users WHERE userid = $1:value;`, payerID)
   .then( async (data) => {
-    if (data.balance < amount){
+    if (data.balance < parseFloat(amount)){
       throw new Error('User doesnt have enough money')
     }
     try {
