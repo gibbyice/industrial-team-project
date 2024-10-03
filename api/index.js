@@ -130,7 +130,8 @@ app.put('/SendMoney', jsonParser, (req, res) => {
 
     try {
       await connection.none(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
-    } catch {
+    } catch(err) {
+	console.log(err)
       throw new Error('error in adding xp');
     }
 
@@ -203,8 +204,8 @@ app.post('/addUser', jsonParser, (req, res) => {
     return res.status(400).json({Error: "Please make sure your name's length is between 2 & 255 (inclusive)"})
   }
   // Execute
-  connection.one(`INSERT INTO users (name, balance, Green_Score, streak, category) 
-    VALUES ($1, 1000, 0, 0, 'User') 
+  connection.one(`INSERT INTO users (name, balance, Green_Score, streak, category, xp) 
+    VALUES ($1, 1000, 0, 0, 'User', 0) 
     RETURNING *;`, name)
   .then((data) => {
     res.status(200).json({Message: "User successfully added.", userID: `${data.userid}`})
