@@ -205,10 +205,9 @@ app.post('/addUser', jsonParser, (req, res) => {
   }
   // Execute
   connection.one(`INSERT INTO users (name, balance, Green_Score, streak, category) 
-    VALUES ($1, 0, 0, 0, 'User') 
+    VALUES ($1, 1000, 0, 0, 'User') 
     RETURNING *;`, name)
   .then((data) => {
-    console.log(data)
     res.status(200).json({Message: "User successfully added.", userID: `${data.userid}`})
   })
   .catch((error) => {
