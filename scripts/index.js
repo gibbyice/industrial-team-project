@@ -1,4 +1,4 @@
-const APIaddress = "http://localhost:3000/";
+const APIaddress = "http://34.201.132.70:3000/";
 var currentPage = 0
 var maxPages = -1 // used to prevent pagination going beyond the total number of companies
 
@@ -7,7 +7,6 @@ window.onload = init() // runs fetchPayee immediatly on page load
 function init(){
     getAccDetails()
     getCompanies()
-    getMaxPages()
 }
 
 function getMaxPages(){
@@ -27,6 +26,7 @@ function getMaxPages(){
 }
 
 function nextPage(){
+    getMaxPages() // refreshes every time in case new companies added
     if (currentPage != maxPages-1){
         currentPage ++
         getCompanies()
@@ -76,7 +76,7 @@ function generateCompanyListItem(data){
     companyCategory.innerHTML = data.category
 
     listItem = document.createElement("a");
-    listItem.setAttribute('href', `companyDetails.php?payeeID=${data.payeeid}`);
+    listItem.setAttribute('href', `companyDetails.php?companyID=${data.userid}`);
     // Apply colour based on EIS
     comapnyEIS = data.carbon_emissions + data.waste_management + data.sustainability_practices
     if (comapnyEIS > 20){
