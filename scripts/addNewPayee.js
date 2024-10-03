@@ -3,9 +3,10 @@ const APIaddress = "http://localhost:3000/";
 // but since security isnt a focus of this project i dont care <3
 function addPayee(){
     payeeID = document.getElementById('accNum').value;
-    payerID = form.elements.loginAccNum.value;
+    payerID = localStorage.getItem("accountID");
+    console.log(payerID)
     requestBody = {
-        "payerID" : 11,
+        "payerID" : payerID,
         "payeeID": payeeID
     }
     requestOptions = {
