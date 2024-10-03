@@ -375,6 +375,31 @@ app.get('/:userID/:payeeID/deletePayee', (req, res) => {
   })
 })
 
+//gets companies for a given page in the 'top rated companies' section of the home page
+app.get('/getAllCompanies/:pageNum', (req, res) => {
+  var offset = req.params.pageNum * 12 // 12 cause it displays 12 per page :shrug:
+  connection.many('SELECT * FROM users WHERE category != \'User\' ORDER BY carbon_emissions + waste_management + sustainability_practices DESC LIMIT 12 OFFSET $1:value', offset)
+  .then((data) => {
+    res.status(200).json({data})
+  })
+  .catch ((error) => {
+    console.log(`idk man smth went wrong` + error)
+    res.status(500).json({Error: `Internal Server Error`})
+  })
+})
+
+//gets total number of pages that can be displayed for the 'top rated companies' section of the home page
+app.get('/maxPageCount', (req, res) =>{
+  connection.one('SELECT COUNT(*) FROM users WHERE category != \'User\'')
+  .then((data) =>{
+    maxPages = Math.ceil(data.count/12)
+    res.status(200).json({"maxPages": maxPages})
+  })
+  .catch ((error) => {
+    console.log(`idk man smth went wrong` + error)
+    res.status(500).json({Error: `Internal Server Error`})
+  })
+})
 
 // Catches all requests to non existant routes, MUST be after all other routes
 app.all('*', (req, res) => {
