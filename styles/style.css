@@ -349,4 +349,34 @@ button.payee-btn.btn-danger {
   margin: 20px 0;
 }
 
+.green-bg{
+  background-color: #48b351;
+}
+
+.yellow-bg{
+  background-color: #caba25f5;
+}
+
+/* nav link stuff taken from here: https://stackoverflow.com/questions/10143357/how-to-make-these-buttons-not-appear-as-blue-links*/
+a.nav-link:link
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:visited
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:hover
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:active
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+
 /* ---------------------------- HOMEPAGE PAGE STYLING ------------------------------ */
