@@ -1,5 +1,5 @@
-const APIaddress = "http://34.201.132.70:3000/";
-//const APIaddress = "http://localhost:3000/";
+//const APIaddress = "http://34.201.132.70:3000/";
+const APIaddress = "http://localhost:3000/";
 const urlParams = new URLSearchParams(window.location.search);
 const ID = urlParams.get('payeeID');
 const Name = urlParams.get('payeeName')
