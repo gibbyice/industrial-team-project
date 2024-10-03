@@ -24,14 +24,12 @@
         <div class="payment-form-container">
             <div class="payment-form-box">
                 <h3 class="me-3"><strong>New Payee Details</strong></h3>
-                <form action="#" onsubmit="confirmPayee()">
-                    <div class="mt-3">
-                        <input type="text" class="form-control" id="accNum" name="accNum" placeholder="Name or Account Number" required>
-                    </div>
-                    <div class="d-flex confirmation-btns mt-4">
-                        <button class="btn btn-success payment-form-btn">Confirm</button>
-                    </div>
-                </form>
+                <div class="mt-3">
+                    <input type="text" class="form-control" id="accNum" name="accNum" placeholder="Name or Account Number" required>
+                </div>
+                <div class="d-flex confirmation-btns mt-4">
+                    <button class="btn btn-success payment-form-btn" onclick="confirmPayee()">Confirm</button>
+                </div>
             </div>
         </div>
     </div>
