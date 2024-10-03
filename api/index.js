@@ -284,6 +284,20 @@ app.get('/Transactions/all/:userID', (req, res) => {
   })
 })
 
+//Searches for the 5 most recent transactions the user has made
+app.get('/recentTransactinos/:userID', (req, res) => {
+  var userID = req.params.userID
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC LIMIT 5;', userID)
+  .then((data) => {
+    res.json(data)
+  })
+  .catch ((error) => {
+    console.log( `ERROR: `, error)
+    res.status(500).json({error})
+  })
+})
+
+
 //Adds a reward to the account reward table when when it is available to a user (i.e. when their green score is high enough)
 app.get('/AddReward/:accountID/:rewardID', (req, res) => {
   var accountID = req.params.accountID
