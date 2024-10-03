@@ -1,4 +1,5 @@
-const APIaddress = "http://localhost:3000/";
+//const APIaddress = "http://localhost:3000/";
+const APIaddress = "http://34.201.132.70:3000/";
 const userID = localStorage.getItem("accountID");
 
 window.onload = fetchBalance();
@@ -68,9 +69,11 @@ function CreateCards(data) {
         sign = ""
         if (data[i].payerid == userID) {
             sign = "-"
+        } else {
+            sign = "+"
         }
-        transactionText = data[i].name+" - "+sign+"£"+data[i].amount;
-        transactionLabel.innerHTML = data[i].name+" - "+sign+"£"+data[i].amount;
+        transactionText = data[i].name+" : "+sign+"£"+data[i].amount;
+        transactionLabel.innerHTML = data[i].name+" : "+sign+"£"+data[i].amount;
         label.appendChild(transactionLabel);
         transaction.appendChild(label);
         modalContainer = document.getElementById('modal-container');
