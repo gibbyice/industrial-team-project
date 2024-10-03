@@ -37,6 +37,26 @@
         </div>
     </div>
 
+    <div class ="green-score-card">
+    <h1 >Top Rated Companies:</h1>
+      <div> 
+        <div style="min-height: 50vh" id="companies-list"> <!--style refused to work via a class for some fucking reason so inline it is-->
+        <!--Content is auto generated-->
+
+          
+
+        </div>
+        
+        <!--pagination controls-->
+        <div class="mt-4 container d-flex justify-content-between">
+        <span class="carousel-control-prev-icon" onclick="prevPage()"></span>
+        <p id="current-page">Page 1</p>
+        <span class="carousel-control-next-icon" onclick="nextPage()"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!-- Footer Padding for Navigation -->
     <div class="manual-spacer" style="height: 170px;"></div>
 
