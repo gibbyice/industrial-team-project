@@ -88,7 +88,7 @@ app.get('/Account/:userID', (req, res) => {
   var userID = req.params.userID
   connection.one(`SELECT * FROM users WHERE userid = $1:value;`, userID)
   .then((data) => {
-    res.json(data)
+    res.status(200).json(data)
   })
   .catch((error) => {
     console.log('ERROR:', error)
@@ -316,7 +316,7 @@ app.get('/AddReward/:accountID/:rewardID', (req, res) => {
 //Searches for all rewards that are available to the user
 app.get('/ViewRewards/:accountID', (req, res) => {
   var accountID = req.params.accountID
-  connection.any(`SELECT name, expiry, min_level
+  connection.any(`SELECT name, TO_CHAR(DATE_TRUNC('second', expiry),'YYYY-MM-DD') as expiry, min_level, discount
     FROM rewards
     JOIN account_reward ON rewards.rewardid = account_reward.rewardid
     WHERE account_reward.accountid = $1;`,accountID)
