@@ -16,7 +16,6 @@ function addCard(name, discount, expiry) {
 
 function fetchUserInfo() {
     var userID = localStorage.getItem("accountID");
-    console.log(userID);
     fetch(APIaddress+`Account/${userID}`)
     .then(response => {
         if (response.status === 400) {

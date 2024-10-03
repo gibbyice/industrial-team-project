@@ -9,7 +9,12 @@ function redirect(){
 function fetchPayees(){
     userID = localStorage.getItem("accountID")
     console.log("fetching payees!")
-    activeFirstChar = "" // init to "" to make sure the first payee always spawns a divider
+    activeFirstChar = "" // init to "" to make sure the first payee always spawns a divider	
+	payeeList = document.createElement("ul");
+	payeeList.setAttribute('class', 'list-group-payee-list')
+	payeeList.setAttribute('id', 'payee-list')
+	payeeListContainer = document.getElementById('payee-list-container') // Get payee list
+    payeeListContainer.appendChild(payeeList)
 
     // Make a GET request
     fetch(APIaddress+`${userID}/getPayees`)
@@ -76,7 +81,7 @@ function generateAlphabetDivider(currentFirstChar){
 function generatePayeeListItem(data){
     payeeList = document.getElementById('payee-list')
 
-    // Creating lable
+    // Creating label
     icon = document.createElement("img");
     if (data.enviroImpactScore != null){
         icon.setAttribute('src', 'icons/business.png')
@@ -90,29 +95,59 @@ function generatePayeeListItem(data){
     payeeName = document.createElement("p");
     payeeName.innerHTML = data.name
 
-    lable = document.createElement("div");
-    lable.setAttribute('class', 'd-flex align-items-center')
-    lable.appendChild(icon)
-    lable.appendChild(payeeName)
+    label = document.createElement("div");
+    label.setAttribute('class', 'd-flex align-items-center')
+    label.appendChild(icon)
+    label.appendChild(payeeName)
 
     // Creating button group
+	payLink = document.createElement("a");
+	payLink.setAttribute('href', `addDetails.php?payeeID=${data.payeeid}&payeeName=${data.name}`);
     payBtn = document.createElement("button");
-    payBtn.setAttribute('class', 'btn btn-sm btn-success payee-btn')
-    payBtn.innerHTML = 'Pay'
+    payBtn.setAttribute('class', 'btn btn-sm btn-success payee-btn');
+    payBtn.innerHTML = 'Pay';
+	payBtn.setAttribute("action", "editsettings.php");
+	payLink.appendChild(payBtn);
 
     deleteBtn = document.createElement("button");
     deleteBtn.setAttribute('class', 'btn btn-sm btn-danger payee-btn')
     deleteBtn.innerHTML = 'Delete'
+	deleteBtn.onclick = function() {		
+		fetch(APIaddress+`${userID}/${data.payeeid}/DeletePayee`)
+			.then(response => {
+				if (response.status === 404){
+					document.getElementById('loginError').setAttribute('class', 'alert alert-danger mt-1') // display the error
+					throw new Error('No user matches provided ID');
+				}
+				else if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log("in the good");
+				console.log(data);
+				payeeList.remove();
+				payeeList = document.createElement("ul");
+				payeeList.setAttribute('class', 'list-group-payee-list')
+				payeeList.setAttribute('id', 'payee-list')
+				fetchPayees();
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			})
+	}
+
 
     btnGroup = document.createElement("div")
     btnGroup.setAttribute('class', 'button-group')
-    btnGroup.appendChild(payBtn)
+    btnGroup.appendChild(payLink)
     btnGroup.appendChild(deleteBtn)
 
     // Final assembly
     payeeListItem = document.createElement("li")
     payeeListItem.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center')
-    payeeListItem.appendChild(lable)
+    payeeListItem.appendChild(label)
     payeeListItem.appendChild(btnGroup)
 
     // Add to payee list

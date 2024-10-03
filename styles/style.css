@@ -47,6 +47,17 @@
   line-height: 1.2;
 }
 
+.green-score-card, .reward-card {
+  background-color: rgb(43, 48, 53);
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (min-width: 768px) { /* tablet/phone screens */
   .scaling-title-text {
     font-size: clamp(100px, 8vw, 120px); /* min size, viewport width (how it scales), max size  */
@@ -55,6 +66,9 @@
     font-size: clamp(40px, 2.5vw, 55px);
   }
   .dynamic-button {
+    width: 85%;
+  }
+  .green-score-card, .reward-card {
     width: 85%;
   }
 }
@@ -67,6 +81,9 @@
     font-size: clamp(50px, 2vw, 75px);
   }
   .dynamic-button {
+    width: 65%;
+  }
+  .green-score-card, .reward-card {
     width: 65%;
   }
 }
@@ -265,7 +282,7 @@ button.payee-btn.btn-danger {
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
-  width: 720px;
+  width: auto;
   height: 80px;
   text-align: center;
   font-size: 18px;
@@ -275,18 +292,6 @@ button.payee-btn.btn-danger {
 /* ----------------------------- ADD NEW PAYEE STYLING ----------------------------- */
 
 /* --------------------------- GREEN SCORE PAGE STYLING ---------------------------- */
-
-.green-score-card, .reward-card {
-  background-color: rgb(43, 48, 53);
-  color: white;
-  border-radius: 10px;
-  padding: 20px;
-  border: 2px solid #ccc;
-  margin-bottom: 20px;
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .green-score-progress {
   height: 40px;
@@ -319,3 +324,59 @@ button.payee-btn.btn-danger {
 }
 
 /* --------------------------- GREEN SCORE PAGE STYLING ---------------------------- */
+
+/* ---------------------------- HOMEPAGE PAGE STYLING ------------------------------ */
+
+.account-number {
+  font-size: 3rem;
+}
+
+.balance-display {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.account-holder {
+  font-size: 3rem;
+}
+
+.button-group div {
+  padding-top: 20px;
+}
+
+.account-divider {
+  border-color: #ccc;
+  margin: 20px 0;
+}
+
+.green-bg{
+  background-color: #48b351;
+}
+
+.yellow-bg{
+  background-color: #caba25f5;
+}
+
+/* nav link stuff taken from here: https://stackoverflow.com/questions/10143357/how-to-make-these-buttons-not-appear-as-blue-links*/
+a.nav-link:link
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:visited
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:hover
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+a.nav-link:active
+{
+   color: #ffffff;
+   text-decoration: none;
+}
+
+/* ---------------------------- HOMEPAGE PAGE STYLING ------------------------------ */

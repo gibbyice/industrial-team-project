@@ -21,10 +21,10 @@
     <div class="questions-container">
       <div class="q&a scaling-body-text">
         <ul>
-          <li>Q: Lorem Ipsum</li>
-          <li>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-          <li>Q: Lorem Ipsum</li>
-          <li>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+          <li>Q: How do we calculate our ratings for companies?</li>
+          <li>A: Through an extensive dataset which gives ratings for a given company, these consist of: Carbon emissions, waste management and sustainability practices. Given we strive for transparency we display this to you in it's raw format and then combine these ratings to calculate how good a given company is.</li>
+          <li>Q: How do we calculate the XP we give out?</li>
+          <li>A: We use a multiplier, the formula for which is: "M = 0.5 + (1.5 * g)" where g is 'green score' which is the sum of the 3 values in our dataset. This allows us to give out XP based on your purchasing habits, if you opt to spend money at a low rated company you will recieve less XP than if you spent that same money at highly rated company.</li>
         </ul>
       </div>
     </div>
