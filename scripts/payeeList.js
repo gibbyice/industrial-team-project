@@ -1,4 +1,4 @@
-const APIaddress = "http://localhost:3000/";
+const APIaddress = "http://34.201.132.70:3000/";
 
 window.onload = fetchPayees() // runs fetchPayee immediatly on page load
 

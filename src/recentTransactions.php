@@ -46,89 +46,20 @@
             </div>
         </div>
         <div class="payment-form-box mt-4" id = "transaction-list">
-            <div class="display-unit" id="ce">
-                <h3 class="mb-5 text-center"><img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3">Red Fuel Services -£10</h3>
-            </div>
         </div>
 
         <!-- Pop-up modal to show transaction details -->
-        <div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 80%; min-height: 100%">
-                <div class="modal-content" style="background-color: rgb(43, 48, 53);">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="transactionModalLabel">Transaction details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="text-center">
-                            <h4>Redfuel Services - £10.00</h4>
-                            <p>Wed 18 Sept 2024</p>
-                        </div>
-                        <div class="score">
-                            <div class="score-item bg-danger mt-3 text-center">Carbon emissions: 3/10</div>
-                            <div class="score-item bg-warning mt-3 text-center">Waste management: 4/10</div>
-                            <div class="score-item bg-danger mt-3 text-center">Sustainability practices: 2/10</div>
-                        </div>
-
-                        <div id="altCompanies" class="carousel slide my-5">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="card green-score-card">
-                                        <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
-                                            <h5 class="text-center">Alternative Company 1</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card green-score-card">
-                                        <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
-                                            <h5 class="text-center">Alternative Company 2</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card green-score-card">
-                                        <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
-                                            <h5 class="text-center">Alternative Company 3</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#altCompanies" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#altCompanies" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
+        <div id='modal-container'>
         </div>
     </div>
 
 </body>
+<script src="../scripts/RecentTransactions.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.querySelectorAll('.display-unit').forEach(unit => {
-        unit.addEventListener('click', function() {
-            var showDetailsModal = new bootstrap.Modal(document.getElementById('transactionModal'));
-            showDetailsModal.show();
-        });
-    });
 
     // Resetting the carousel to its first frame
-    document.getElementById('transactionModal').addEventListener('shown.bs.modal', function() {
-        var carousel = document.querySelector('#altCompanies');
-        var carouselInstance = new bootstrap.Carousel(carousel);
-        carouselInstance.to(0);
-    });
+    
 </script>
-<script src="../scripts/RecentTransactions.js"></script>
 
 </html>
