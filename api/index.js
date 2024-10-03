@@ -251,7 +251,7 @@ app.get('/DeleteAccount/:userID', (req, res) => {
 //Searches for all payments the user has made
 app.get('/Transactions/Payer/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON userid = payeeid WHERE userid != ${userID} AND payerid=${userID}) ORDER BY date DESC;', userID)
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON userid = payeeid WHERE userid != ${userID} AND payerid=${userID}) ORDER BY date DESC;', userID)
   .then((data) => {
     res.json(data)
   })
@@ -263,7 +263,7 @@ app.get('/Transactions/Payer/:userID', (req, res) => {
 //Searches for all payments the user has received
 app.get('/Transactions/Payee/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON userid = payerid WHERE userid != ${userID} AND payeeid=${userID}) ORDER BY date DESC;')
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON userid = payerid WHERE userid != ${userID} AND payeeid=${userID}) ORDER BY date DESC;')
   .then((data) => {
     res.json(data)
   })
@@ -275,7 +275,7 @@ app.get('/Transactions/Payee/:userID', (req, res) => {
 //Searches for all transactions the user has made
 app.get('/Transactions/all/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC;', userID)
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC;', userID)
   .then((data) => {
     res.json(data)
   })
