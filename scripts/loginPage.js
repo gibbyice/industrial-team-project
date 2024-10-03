@@ -23,7 +23,7 @@ function login(){
             // Do the thing here
             console.log("in the good")
             localStorage.setItem("accountID", accountID) // stores id logged in with
-            window.location.replace("../src/faq.php"); // redirects to new page
+            window.location.replace("../src/index.php"); // redirects to new page
         })
         .catch(error => {
             console.error('Error:', error);
