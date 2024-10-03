@@ -116,30 +116,29 @@ app.put('/SendMoney', jsonParser, (req, res) => {
   var payeeID = req.body.payeeID
   var amount = req.body.amount
   var reference = req.body.reference
-  // verifying sufficient funds in account
+
   connection.one(`SELECT balance FROM users WHERE userid = $1:value;`, payerID)
-  .then( data => {
+  .then( async (data) => {
     if (data.balance < amount){
-      return res.status(400).json({Error: "Insufficient funds in your account."})
+      throw new Error('User doesnt have enough money')
+    }
+    try {
+      await connection.none(`CALL send_money($1, $2, $3, $4);`, [payerID, payeeID, amount, reference]);
+    } catch {
+      throw new Error('Error in sending money')
     }
 
-    // actually doing the transfer 
-    connection.one(`CALL send_money($1, $2, $3, $4);`, [payerID, payeeID, amount, reference])
-    .then(
-      
-      connection.one(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
-      .then(res.status(200).json({Message: `Sent ${amount} to user ${payeeID} successfully.`}))
-      .catch(res.status(200).json({Message: `Sent ${amount} to user ${payeeID}, but error in adding xp`}))
-    )
-    .catch((error) => {
-      console.log("ERROR in sending money", error)
-      res.status(400).json({Message: `Something went wrong, please verify the specified accounts exist.`})
-    })
+    try {
+      await connection.none(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
+    } catch {
+      throw new Error('error in adding xp');
+    }
 
+    res.status(200).json({Error: "Sent Money Succesfully"})
+    // actually doing the transfer 
   }) .catch((error) => {
     console.log("Error occured when retrieving account balance: " + error)
     res.status(500).json({Error: "Internal Server Error - Error occured when retrieving account balance"})
-    return
   })
 })
 
