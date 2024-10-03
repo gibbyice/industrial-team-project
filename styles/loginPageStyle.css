@@ -1,0 +1,74 @@
+/* ------------------------------- TITLE STYLING ---------------------------------- */
+
+.title {
+    padding-top: 30px;
+    background-color: rgb(43, 48, 53);
+    padding-bottom: 30px;
+}
+
+.divider {
+    width: 85%;
+    background-color: white;
+    height: 5px;
+    margin: 0 auto 20px auto;
+    border-radius: 10px;
+}
+
+/* ------------------------------- TITLE STYLING ---------------------------------- */
+
+/* ---------------------------------- FONTS --------------------------------------- */
+
+.company-title {
+    font-family: "Pacifico", cursive;
+    font-style: normal;
+    font-size: 38px;
+}
+
+.oswald-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.oswaldExtraLight {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+}
+
+.oswaldMedium {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    background-color: rgb(62, 70, 78);
+}
+
+/* ---------------------------------- FONTS --------------------------------------- */
+
+/* ------------------------------- BODY STYLING ----------------------------------- */
+.parent {
+    min-height: 80vh;
+}
+
+.middle-divider {
+    margin: 10vh 0px;
+}
+
+.login-form-box {
+    width: 80%;
+    max-width: 800px;
+    background-color: rgb(43, 48, 53);
+    padding: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin: auto;
+}
+
+.login-form-btn {
+    padding: 4px;
+    width: 100%;
+}
