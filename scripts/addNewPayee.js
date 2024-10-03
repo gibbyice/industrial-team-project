@@ -30,7 +30,7 @@ function addPayee(){
         .then(data => {
             // Do the thing here
             localStorage.setItem("payeeID", payeeID) // stores id logged in with
-            window.location.replace("../src/faq.php"); // redirects to new page
+            window.location.replace("../src/index.php"); // redirects to new page
         })
         .catch(error => {
             console.error('Error:', error);

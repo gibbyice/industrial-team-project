@@ -55,7 +55,7 @@ function makeTransaction() {
         })
         .then(data => {
             console.log("success")
-			window.location.replace("../src/faq.php")
+			window.location.replace("../src/index.php")
         })
         .catch(error => {
             console.error('Error:', error);
