@@ -120,7 +120,7 @@ function getBetterAlternatives(userID, category){
                                             <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
                                                 <div class="d-flex justify-content-between">
                                                     <h3 class="mt-2">${result[i].name}</h3>
-                                                    <h3 class="mt-2">Acc Num: ${result[i].userID}</h3>
+                                                    <h3 class="mt-2">Acc Num: ${result[i].userid}</h3>
                                                 </div>
                                                 <div class="display-unit d-flex justify-content-between ${carbonRAG}">
                                                     <h3 class="mt-2">Carbon Emissions:</h3>
