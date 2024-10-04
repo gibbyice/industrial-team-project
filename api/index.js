@@ -284,19 +284,32 @@ app.get('/Transactions/all/:userID', (req, res) => {
   })
 })
 
-//Searches for the 5 most recent transactions the user has made
-app.get('/recentTransactinos/:userID', (req, res) => {
+//gets the 11 transactions for a given page of transactions on the index page
+app.get('/getTransactions/:userID/:pageNum', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC LIMIT 5;', userID)
+  var offset = req.params.pageNum * 11
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC LIMIT 11 OFFSET $2;', [userID,offset])
   .then((data) => {
     res.json(data)
   })
   .catch ((error) => {
-    console.log( `ERROR: `, error)
-    res.status(500).json({error})
+    console.log( `Account has no transactoins `, error)
+    res.status(404).json({error})
   })
 })
 
+app.get('/getTransaction/:userID/:transactionID', (req, res) => {
+  var userID = req.params.userID
+  var transactionID = req.params.transactionID
+  connection.one('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND transactionid = $2', [userID, transactionID])
+  .then((data) => {
+    res.json(data)
+  })
+  .catch ((error) => {
+    console.log( `transaction doesnt exist`, error)
+    res.status(404).json({error})
+  })
+})
 
 //Adds a reward to the account reward table when when it is available to a user (i.e. when their green score is high enough)
 app.get('/AddReward/:accountID/:rewardID', (req, res) => {
@@ -401,11 +414,32 @@ app.get('/getAllCompanies/:pageNum', (req, res) => {
   })
 })
 
-//gets total number of pages that can be displayed for the 'top rated companies' section of the home page
-app.get('/maxPageCount', (req, res) =>{
+//gets total number of pages of companies that can be displayed
+app.get('/companyMaxPageCount', (req, res) =>{
   connection.one('SELECT COUNT(*) FROM users WHERE category != \'User\'')
   .then((data) =>{
     maxPages = Math.ceil(data.count/12)
+    res.status(200).json({"maxPages": maxPages})
+  })
+  .catch ((error) => {
+    console.log(`idk man smth went wrong` + error)
+    res.status(500).json({Error: `Internal Server Error`})
+  })
+})
+
+//gets total number of pages of transactions that can be displayed
+app.get('/transactionMaxPageCount/:userID', (req, res) =>{
+  var userID = req.params.userID
+  // there may be a better way to do this query but like :shrug: it works
+  connection.one(`SELECT count(*) FROM (
+                    SELECT transactionid 
+                    FROM transactions 
+                    JOIN users ON (userid = payerid OR userid = payeeid) 
+                    WHERE userid != 69 AND (payeeid=69 OR payerid=69) 
+                    ORDER BY date DESC
+                  )`, userID)
+  .then((data) =>{
+    maxPages = Math.ceil(data.count/11)
     res.status(200).json({"maxPages": maxPages})
   })
   .catch ((error) => {
