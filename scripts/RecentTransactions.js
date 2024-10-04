@@ -126,11 +126,12 @@ function CreateCards(data) {
                         </div> `
         if (data[i].carbon_emissions != null) { 
             innerHTML+=`<div class="score">
-                                <div class="score-item bg-`+carbonColor+` mt-3 text-center">`+data[i].carbon_emissions+`</div>
-                                <div class="score-item bg-`+wasteColor+` mt-3 text-center">`+data[i].waste_management+`</div>
-                                <div class="score-item bg-`+susColor+` mt-3 text-center">`+data[i].sustainability_practices+`</div>
+                                <div class="score-item bg-`+carbonColor+` mt-3 text-center">Carbon Emissions: `+data[i].carbon_emissions+`/10</div>
+                                <div class="score-item bg-`+wasteColor+` mt-3 text-center">Waste Management: `+data[i].waste_management+`/10</div>
+                                <div class="score-item bg-`+susColor+` mt-3 text-center">Sustainability Practices: `+data[i].sustainability_practices+`/10</div>
                             </div>
-                            <div id="altCompanies`+i+`" class="carousel slide my-5">
+                            <h5 class="mb-2 mt-2 text-center">Better alternatives within the ${data[i].category} category:</h5>
+                            <div id="altCompanies`+i+`" class="carousel slide">
                                 
                             </div>`
                         
@@ -179,23 +180,52 @@ function fetchAlternatives(id,category,i) {
             else {
                 carousels+=`<div class="carousel-item">`
             }
+            if (data[j].carbon_emissions >= 8) {
+                carbonColor = "success"
+            }
+            else if (data[j].carbon_emissions >= 4) {
+                carbonColor = "warning"
+            }
+            else {
+                carbonColor = "danger"
+            }
+            if (data[j].waste_management >= 8) {
+                wasteColor = "success"
+            }
+            else if (data[j].waste_management >= 4) {
+                wasteColor = "warning"
+            }
+            else {
+                wasteColor = "danger"
+            }
+            if (data[j].sustainability_practices >= 8) {
+                susColor = "success"
+            }
+            else if (data[j].sustainability_practices >= 4) {
+                susColor = "warning"
+            }
+            else {
+                susColor = "danger"
+            }
             carousels+=`    <div class="card green-score-card">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: 100%;">
                                     <h5 class="text-center">`+data[j].name+`</h5>
+                                    <div class="score-item bg-`+carbonColor+` mt-3 text-center">Carbon Emissions: `+data[j].carbon_emissions+`/10</div>
+                                    <div class="score-item bg-`+wasteColor+` mt-3 text-center">Waste Management: `+data[j].waste_management+`/10</div>
+                                    <div class="score-item bg-`+susColor+` mt-3 text-center">Sustainability Practices: `+data[j].sustainability_practices+`/10</div>
                                 </div>
                             </div>
                         </div>`
         }
         carouselContainer.innerHTML=carousels+`
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#altCompanies`+i+`" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <button class="carousel-control-prev carousel-control-prev-icon mt-5" type="button" data-bs-target="#altCompanies`+i+`" data-bs-slide="prev">
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#altCompanies`+i+`" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <button class="carousel-control-next carousel-control-next-icon mt-5" type="button" data-bs-target="#altCompanies`+i+`" data-bs-slide="next">
                                 <span class="visually-hidden">Next</span>
                             </button>`
+                            
 
     })
     .catch(error => {console.log("ERROR: ", error)})
