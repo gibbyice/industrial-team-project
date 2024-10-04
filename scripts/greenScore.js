@@ -57,7 +57,7 @@ function fetchDiscounts() {
 }
 
 function getMaxPages(){
-    fetch(APIaddress+`maxPageCount`)
+    fetch(APIaddress+`companyMaxPageCount`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

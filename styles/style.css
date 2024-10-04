@@ -357,6 +357,18 @@ button.payee-btn.btn-danger {
   background-color: #caba25f5;
 }
 
+.neutral-bg{
+  background-color: #3E464E;
+}
+
+.dark-bg{
+  background-color: #2B3035;
+}
+
+.carousel-nav{
+  margin-top: 200px;
+}
+
 /* nav link stuff taken from here: https://stackoverflow.com/questions/10143357/how-to-make-these-buttons-not-appear-as-blue-links*/
 a.nav-link:link
 {
