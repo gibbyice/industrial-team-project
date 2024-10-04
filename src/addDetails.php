@@ -23,8 +23,8 @@
             <h3>To: <img src="icons/business.png" alt="Payee Icon" class="payee-icon me-3"><strong><?php echo $_GET['payeeName']; ?></strong></h3>
             <form action="#" onsubmit="showConfirmation(); return false;">
                 <div class="mb-3">
-                    <label for="amount" class="form-label">Amount:</label>
-                    <input type="decimal" class="form-control" id="amount" name="amount" placeholder="£0.00" required>
+                  <label for="amount" class="form-label">Amount:</label>
+                  <input type="number" class="form-control" id="amount" name="amount" placeholder="£0.00" min="0.01" step="0.01" required>
                 </div>
                 <div class="mb-3">
                     <label for="reference" class="form-label">Reference:</label>

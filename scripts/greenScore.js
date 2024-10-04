@@ -38,8 +38,7 @@ function fetchUserInfo() {
 }
 
 function fetchDiscounts() {
-    var userID = localStorage.getItem.accountID;
-    userID = 70;
+    var userID = localStorage.getItem("accountID");
     fetch(APIaddress+`ViewRewards/${userID}`)
     .then(response => {
         if (response.status === 400) {
