@@ -88,7 +88,7 @@ app.get('/Account/:userID', (req, res) => {
   var userID = req.params.userID
   connection.one(`SELECT * FROM users WHERE userid = $1:value;`, userID)
   .then((data) => {
-    res.json(data)
+    res.status(200).json(data)
   })
   .catch((error) => {
     console.log('ERROR:', error)
@@ -116,30 +116,30 @@ app.put('/SendMoney', jsonParser, (req, res) => {
   var payeeID = req.body.payeeID
   var amount = req.body.amount
   var reference = req.body.reference
-  // verifying sufficient funds in account
+
   connection.one(`SELECT balance FROM users WHERE userid = $1:value;`, payerID)
-  .then( data => {
-    if (data.balance < amount){
-      return res.status(400).json({Error: "Insufficient funds in your account."})
+  .then( async (data) => {
+    if (data.balance < parseFloat(amount)){
+      throw new Error('User doesnt have enough money')
+    }
+    try {
+      await connection.none(`CALL send_money($1, $2, $3, $4);`, [payerID, payeeID, amount, reference]);
+    } catch {
+      throw new Error('Error in sending money')
     }
 
-    // actually doing the transfer 
-    connection.one(`CALL send_money($1, $2, $3, $4);`, [payerID, payeeID, amount, reference])
-    .then(
-      
-      connection.one(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
-      .then(res.status(200).json({Message: `Sent ${amount} to user ${payeeID} successfully.`}))
-      .catch(res.status(200).json({Message: `Sent ${amount} to user ${payeeID}, but error in adding xp`}))
-    )
-    .catch((error) => {
-      console.log("ERROR in sending money", error)
-      res.status(400).json({Message: `Something went wrong, please verify the specified accounts exist.`})
-    })
+    try {
+      await connection.none(`CALL add_xp($1, $2, $3)`, [payerID, payeeID, amount])
+    } catch(err) {
+	console.log(err)
+      throw new Error('error in adding xp');
+    }
 
+    res.status(200).json({Error: "Sent Money Succesfully"})
+    // actually doing the transfer 
   }) .catch((error) => {
     console.log("Error occured when retrieving account balance: " + error)
     res.status(500).json({Error: "Internal Server Error - Error occured when retrieving account balance"})
-    return
   })
 })
 
@@ -204,8 +204,8 @@ app.post('/addUser', jsonParser, (req, res) => {
     return res.status(400).json({Error: "Please make sure your name's length is between 2 & 255 (inclusive)"})
   }
   // Execute
-  connection.one(`INSERT INTO users (name, balance, Green_Score, streak, category) 
-    VALUES ($1, 1000, 0, 0, 'User') 
+  connection.one(`INSERT INTO users (name, balance, Green_Score, streak, category, xp) 
+    VALUES ($1, 1000, 0, 0, 'User', 0) 
     RETURNING *;`, name)
   .then((data) => {
     res.status(200).json({Message: "User successfully added.", userID: `${data.userid}`})
@@ -251,7 +251,7 @@ app.get('/DeleteAccount/:userID', (req, res) => {
 //Searches for all payments the user has made
 app.get('/Transactions/Payer/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON userid = payeeid WHERE userid != ${userID} AND payerid=${userID}) ORDER BY date DESC;', userID)
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON userid = payeeid WHERE userid != ${userID} AND payerid=${userID}) ORDER BY date DESC;', userID)
   .then((data) => {
     res.json(data)
   })
@@ -263,7 +263,7 @@ app.get('/Transactions/Payer/:userID', (req, res) => {
 //Searches for all payments the user has received
 app.get('/Transactions/Payee/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON userid = payerid WHERE userid != ${userID} AND payeeid=${userID}) ORDER BY date DESC;')
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON userid = payerid WHERE userid != ${userID} AND payeeid=${userID}) ORDER BY date DESC;')
   .then((data) => {
     res.json(data)
   })
@@ -275,7 +275,7 @@ app.get('/Transactions/Payee/:userID', (req, res) => {
 //Searches for all transactions the user has made
 app.get('/Transactions/all/:userID', (req, res) => {
   var userID = req.params.userID
-  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions + waste_management + sustainability_practices as "enviroImpactScore" FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC;', userID)
+  connection.many('SELECT transactionid, payerid, payeeid, name, amount, reference, date, carbon_emissions, waste_management, sustainability_practices, category FROM transactions JOIN users ON (userid = payerid OR userid = payeeid) WHERE userid != $1 AND (payeeid=$1 OR payerid=$1) ORDER BY date DESC;', userID)
   .then((data) => {
     res.json(data)
   })
@@ -329,7 +329,7 @@ app.get('/AddReward/:accountID/:rewardID', (req, res) => {
 //Searches for all rewards that are available to the user
 app.get('/ViewRewards/:accountID', (req, res) => {
   var accountID = req.params.accountID
-  connection.any(`SELECT name, expiry, min_level
+  connection.any(`SELECT name, TO_CHAR(DATE_TRUNC('second', expiry),'YYYY-MM-DD') as expiry, min_level, discount
     FROM rewards
     JOIN account_reward ON rewards.rewardid = account_reward.rewardid
     WHERE account_reward.accountid = $1;`,accountID)
