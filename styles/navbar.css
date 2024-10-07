@@ -1,0 +1,60 @@
+/* --------------------------------- NAVBAR --------------------------------------- */
+
+.navbar {
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 155px;
+}
+
+.nav-btn {
+  background-color: rgb(33, 37, 41);
+  padding: 0;
+  transition: background-color 0.3s ease;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.active-btn {
+  background-color: rgb(62, 70, 78);
+}
+
+.nav-btn-wrapper {
+  height: 140px; /* super hacky workaround lmao, increase the height of this to make the buttons taller, then increase the navbar height to make them fit lol */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+/* these two classes also help make the entire area around the image clickable so that helps get users to where they actually wanna go */
+.nav-btn-link {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-btn img {
+  width: 75px;
+  height: auto;
+}
+
+.nav-btn:nth-child(2) img {
+  width: 75px;
+  height: 75px;
+} /* took too long to find this solution, next time we just gotta make sure each image is the same damn height :sob: just changing the height manually didn't work  */
+
+.container-fluid {
+  padding: 0;
+  margin: 0;
+} /* makes sure the navbar touches the sides of the page */
+
+
+/* --------------------------------- NAVBAR --------------------------------------- */
